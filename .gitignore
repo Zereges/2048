@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+# MVS Solution stuff
+*.opensdf
+*.sdf
+*.suo
+Release/*
+Debug/*
