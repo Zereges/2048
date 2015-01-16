@@ -13,7 +13,7 @@ class Window
     public:
         static const Window& get_single();
         void clear() const;
-        void add(Game game) const;
+        void add(Game::Objects background) const;
         void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
         ~Window();
 

@@ -88,7 +88,9 @@
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Definitions\Color.hpp" />
     <ClInclude Include="src\Definitions\Definitions.hpp" />
+    <ClInclude Include="src\Definitions\Rect.hpp" />
     <ClInclude Include="src\Game\Game.hpp" />
     <ClInclude Include="src\Program\Program.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />

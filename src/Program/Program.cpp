@@ -19,7 +19,7 @@ int Program::start()
             game.event_handler(event);
         }
         window.clear();
-        window.add(game);
+        window.add(game.get_background());
         window.render_finish();
     }
     return m_ret_value;

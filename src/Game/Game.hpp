@@ -9,12 +9,15 @@
 class Game
 {
     public:
+        typedef std::vector<Rect> Objects;
+
         void event_handler(const SDL_Event& event);
         void key_handler(const SDL_KeyboardEvent& key);
+        const Objects& get_background() const { return background; }
         Game();
     
     private:
-        std::vector<Rect> background;
+        Objects background;
 };
 
 #endif // _GAME_HPP_

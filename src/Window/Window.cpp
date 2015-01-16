@@ -24,7 +24,11 @@ void Window::clear() const
     SDL_RenderClear(const_cast<SDL_Renderer*>(m_renderer));
 }
 
-void Window::add(Game game) const
+void Window::add(Game::Objects background) const
 {
-    
+    for (auto iter = cbegin(background); iter != cend(background); ++iter)
+    {
+        SDL_SetRenderDrawColor(const_cast<SDL_Renderer*>(m_renderer), iter->get_color().r, iter->get_color().g, iter->get_color().b, iter->get_color().a);
+        SDL_RenderFillRect(const_cast<SDL_Renderer*>(m_renderer), &iter->get_rect());
+    }
 }
