@@ -19,7 +19,8 @@ int Program::start()
             game.event_handler(event);
         }
         window.clear();
-        window.render();
+        window.add(game);
+        window.render_finish();
     }
     return m_ret_value;
 }

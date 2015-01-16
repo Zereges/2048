@@ -3,16 +3,18 @@
 #include <memory>
 #include <SDL.h>
 #include "..\Definitions\Definitions.hpp"
+#include "..\Game\Game.hpp"
 
 /*
- *  Singleton wrapper around SDL_Window and SDL_Render allowing creation and drawing on window.
+ *  Singleton wrapper around SDL_Window and SDL_Renderer allowing creation and drawing on window.
  */
 class Window
 {
     public:
         static const Window& get_single();
         void clear() const;
-        void render() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
+        void add(Game game) const;
+        void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
         ~Window();
 
     private:

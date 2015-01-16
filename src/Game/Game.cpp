@@ -2,6 +2,11 @@
 #include "Game.hpp"
 #include "../Program/Program.hpp"
 
+Game::Game()
+{
+    
+}
+
 void Game::event_handler(const SDL_Event& event)
 {
     switch (event.type)
