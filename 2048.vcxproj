@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Definitions\Definitions.cpp" />
+    <ClCompile Include="src\Definitions\Rect.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Program\Program.cpp" />

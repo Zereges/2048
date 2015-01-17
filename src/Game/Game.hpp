@@ -13,11 +13,11 @@ class Game
 
         void event_handler(const SDL_Event& event);
         void key_handler(const SDL_KeyboardEvent& key);
-        const Objects& get_background() const { return background; }
+        const Objects& get_background() const { return m_background; }
         Game();
     
     private:
-        Objects background;
+        Objects m_background;
 };
 
 #endif // _GAME_HPP_

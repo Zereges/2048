@@ -12,6 +12,7 @@ class Window
 {
     public:
         static const Window& get_single();
+        const SDL_Renderer* get_renderer() const { return m_renderer; }
         void clear() const;
         void add(Game::Objects background) const;
         void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
