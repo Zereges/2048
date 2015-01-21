@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Definitions\Definitions.cpp" />
+    <ClCompile Include="src\Definitions\NumberedRect.cpp" />
     <ClCompile Include="src\Definitions\Rect.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -91,6 +92,7 @@
   <ItemGroup>
     <ClInclude Include="src\Definitions\Color.hpp" />
     <ClInclude Include="src\Definitions\Definitions.hpp" />
+    <ClInclude Include="src\Definitions\NumberedRect.hpp" />
     <ClInclude Include="src\Definitions\Rect.hpp" />
     <ClInclude Include="src\Game\Game.hpp" />
     <ClInclude Include="src\Program\Program.hpp" />

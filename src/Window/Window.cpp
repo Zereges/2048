@@ -24,8 +24,8 @@ void Window::clear() const
     SDL_RenderClear(const_cast<SDL_Renderer*>(m_renderer));
 }
 
-void Window::add(Game::Objects background) const
+void Window::add(Game::Objects objects) const
 {
-    for (auto iter = cbegin(background); iter != cend(background); ++iter)
+    for (auto iter = cbegin(objects); iter != cend(objects); ++iter)
         iter->draw();
 }
