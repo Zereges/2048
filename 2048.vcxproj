@@ -90,6 +90,8 @@
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Animation\Animator.hpp" />
+    <ClInclude Include="src\Animation\Movement.hpp" />
     <ClInclude Include="src\Definitions\Color.hpp" />
     <ClInclude Include="src\Definitions\Definitions.hpp" />
     <ClInclude Include="src\Definitions\NumberedRect.hpp" />

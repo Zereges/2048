@@ -20,3 +20,5 @@ const std::vector<Color> Definitions::BLOCK_COLORS = {
 };
 
 const Color Definitions::BACKGROUND_COLOR = Color(30, 30, 30);
+
+const int Definitions::DEFAULT_MOVE_SPEED = 1;

@@ -19,6 +19,7 @@ class Rect
              std::size_t h = Definitions::BLOCK_SIZE_Y) : Rect(point.x, point.y, color, w, h) { }
         virtual ~Rect() { }
         const SDL_Rect& get_rect() const { return m_rect; }
+        SDL_Rect& get_rect() { return m_rect; }
         const Color& get_color() const { return m_color; }
         virtual void draw() const;
 

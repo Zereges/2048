@@ -5,14 +5,14 @@
 #include <exception>
 #include "..\Definitions\Definitions.hpp"
 #include "..\Definitions\Rect.hpp"
-
+#include "..\Animation\Animator.hpp"
 /*  
  *  Game class handling user events.
  */
 class Game
 {
     public:
-
+        Game();
         void event_handler(const SDL_Event& event);
         void key_handler(const SDL_KeyboardEvent& key);
         const Rects& get_background() const { return m_background; }
@@ -25,11 +25,12 @@ class Game
                      Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SPACE + Definitions::BLOCK_SIZE_Y)
                    };
         }
-        Game();
+        void animate() { m_animator.animate(); }
     
     private:
         Rects m_background;
         Rects m_rects;
+        Animator m_animator;
 };
 
 #endif // _GAME_HPP_

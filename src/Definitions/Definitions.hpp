@@ -9,6 +9,14 @@ struct Color;
 
 typedef std::vector<Rect> Rects;
 
+enum Directions
+{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+};
+
 /*  
  *  Abstract class containing definitions used throughout the program.
  */
@@ -33,6 +41,8 @@ class Definitions
         static const std::vector<Color> BLOCK_COLORS;   // Colors of blocks based on their values.
 
         static const Color BACKGROUND_COLOR;            // Background color of window.
+
+        static const int DEFAULT_MOVE_SPEED;
 
     private:
         Definitions() = delete; // To make it abstract

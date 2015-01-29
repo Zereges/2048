@@ -3,6 +3,7 @@
 #include "Program.hpp"
 #include "../Window/Window.hpp"
 #include "../Game/Game.hpp"
+#include "../Animation/Animator.hpp"
 bool Program::m_is_running = false;
 int Program::m_ret_value = EXIT_SUCCESS;
 
@@ -18,6 +19,7 @@ int Program::start()
         {
             game.event_handler(event);
         }
+        game.animate();
         window.clear();
         window.add(game.get_background());
         window.add(game.get_rects());
