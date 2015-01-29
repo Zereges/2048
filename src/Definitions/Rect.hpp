@@ -1,9 +1,9 @@
 #ifndef _RECT_HPP_
 #define _RECT_HPP_
 #include <SDL.h>
-#include "Color.hpp"
 #include <memory> // size_t
 #include "../Definitions/Definitions.hpp"
+#include "../Definitions/Color.hpp"
 
 /*  
  *  Wrapper around SDL_Rect with coloring posibility.

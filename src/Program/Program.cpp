@@ -20,6 +20,7 @@ int Program::start()
         }
         window.clear();
         window.add(game.get_background());
+        window.add(game.get_rects());
         window.render_finish();
     }
     return m_ret_value;

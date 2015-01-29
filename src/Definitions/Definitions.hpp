@@ -3,7 +3,11 @@
 #include <string>
 #include <math.h>
 #include <vector>
-#include "Color.hpp"
+
+class Rect;
+struct Color;
+
+typedef std::vector<Rect> Rects;
 
 /*  
  *  Abstract class containing definitions used throughout the program.

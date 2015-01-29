@@ -24,7 +24,7 @@ void Window::clear() const
     SDL_RenderClear(const_cast<SDL_Renderer*>(m_renderer));
 }
 
-void Window::add(Game::Objects objects) const
+void Window::add(Rects objects) const
 {
     for (auto iter = cbegin(objects); iter != cend(objects); ++iter)
         iter->draw();

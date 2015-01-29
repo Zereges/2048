@@ -3,18 +3,20 @@
 #include <SDL.h>
 #include <vector>
 #include <exception>
-#include "../Definitions/Rect.hpp"
+#include "..\Definitions\Definitions.hpp"
+#include "..\Definitions\Rect.hpp"
+
 /*  
  *  Game class handling user events.
  */
 class Game
 {
     public:
-        typedef std::vector<Rect> Objects;
 
         void event_handler(const SDL_Event& event);
         void key_handler(const SDL_KeyboardEvent& key);
-        const Objects& get_background() const { return m_background; }
+        const Rects& get_background() const { return m_background; }
+        const Rects& get_rects() const { return m_rects; }
         SDL_Point get_block_coords(unsigned int x, unsigned int y) const
         {
             if (x < 0 || x >= Definitions::BLOCK_COUNT_X || y < 0 || y >= Definitions::BLOCK_COUNT_Y)
@@ -26,7 +28,8 @@ class Game
         Game();
     
     private:
-        Objects m_background;
+        Rects m_background;
+        Rects m_rects;
 };
 
 #endif // _GAME_HPP_

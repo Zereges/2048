@@ -1,6 +1,6 @@
 #ifndef _PROGRAM_HPP_
 #define _PROGRAM_HPP_
-#include "../Window/Window.hpp"
+
 /*  
  *  Static class for handling program and SDL events.
  */

@@ -1,6 +1,7 @@
 #ifndef _NUMBEREDRECT_HPP_
 #define _NUMBEREDRECT_HPP_
 #include <SDL.h>
+#include "Definitions.hpp"
 #include "Rect.hpp"
 
 /*  
