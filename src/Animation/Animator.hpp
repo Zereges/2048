@@ -14,12 +14,13 @@
 class Animator
 {
     public:
-        void add_movement(Rect& rect, Directions direction, const SDL_Point& point, int speed = Definitions::DEFAULT_MOVE_SPEED)
-            { m_movement.push_back(Movement(rect, direction, point, speed)); }
+        void add_movement(Rect& rect, const SDL_Point& point, int speed = Definitions::DEFAULT_MOVE_SPEED)
+            { m_movement.emplace_back(rect, point, speed); }
         void animate()
         {
-            // std::remove_if(begin(m_movement), end(m_movement), [](Movement m) { return m.move(); });
+            m_movement.erase(std::remove_if(begin(m_movement), end(m_movement), [](Movement& m){ return m.move(); }), end(m_movement));
         }
+        bool can_play() { return m_movement.empty(); }
 
     private:
         std::vector<Movement> m_movement;

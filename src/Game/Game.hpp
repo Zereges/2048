@@ -26,7 +26,9 @@ class Game
                    };
         }
         void animate() { m_animator.animate(); }
-    
+        bool can_play() { return m_animator.can_play(); }
+        void play(Directions direction);
+
     private:
         Rects m_background;
         Rects m_rects;
