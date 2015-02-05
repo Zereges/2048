@@ -16,9 +16,12 @@ const std::size_t Definitions::BLOCK_SIZE_Y = 400 / BLOCK_COUNT_Y;
 const std::size_t Definitions::BLOCK_SPACE = 15;
 const std::vector<Color> Definitions::BLOCK_COLORS = {
     Color(85, 85, 85),    // default empty
-    Color(153, 171, 174), // 2
+    Color(153, 171, 174), // BLOCK_2
+    Color(128, 200, 185), // BLOCK_4
 };
 
 const Color Definitions::BACKGROUND_COLOR = Color(30, 30, 30);
 
 const int Definitions::DEFAULT_MOVE_SPEED = 5;
+const int Definitions::BLOCK_4_SPAWN_CHANCE = 15;
+const int Definitions::DEFAULT_START_BLOCKS = 2;

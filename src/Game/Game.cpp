@@ -14,8 +14,7 @@ Game::Game()
                 Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SIZE_Y + Definitions::BLOCK_SPACE),
                 Definitions::BLOCK_COLORS[0]);
         }
-
-//    m_rects.emplace_back(get_block_coords(0, 0), Definitions::BLOCK_COLORS[1]);
+    m_state.resize(Definitions::BLOCK_COUNT_X, std::vector<int>(Definitions::BLOCK_COUNT_Y, 0));
 }
 
 void Game::event_handler(const SDL_Event& event)
@@ -45,8 +44,15 @@ void Game::key_handler(const SDL_KeyboardEvent& keyevent)
         case SDLK_RIGHT: play(RIGHT); break;
         case SDLK_UP: play(UP); break;
         case SDLK_DOWN: play(DOWN); break;
-            
+        case SDLK_r: restart(); break; // TBD
+        case SDLK_b: random_block(chance(Definitions::BLOCK_4_SPAWN_CHANCE) ? BLOCK_4 : BLOCK_2); break; // TBD
     }
+}
+
+void Game::start()
+{
+    for (int i = 0; i < Definitions::DEFAULT_START_BLOCKS; ++i)
+        random_block(chance(Definitions::BLOCK_4_SPAWN_CHANCE) ? BLOCK_4 : BLOCK_2);
 }
 
 void Game::play(Directions direction)
@@ -57,14 +63,14 @@ void Game::play(Directions direction)
     for (auto iter = begin(m_rects); iter != end(m_rects); ++iter)
     {
         SDL_Point p;
-        switch (direction)
+        switch (direction) // ToDo: here
         {
             case LEFT:
                 p = get_block_coords(0, 0);
                 p.y = iter->get_rect().y;
                 break;
             case RIGHT:
-                p = get_block_coords(3, 0);
+                p = get_block_coords(Definitions::BLOCK_COUNT_X - 1, 0);
                 p.y = iter->get_rect().y;
                 break;
             case UP:
@@ -72,10 +78,33 @@ void Game::play(Directions direction)
                 p.x = iter->get_rect().x;
                 break;
             case DOWN:
-                p = get_block_coords(0, 3);
+                p = get_block_coords(0, Definitions::BLOCK_COUNT_Y - 1);
                 p.x = iter->get_rect().x;
                 break;
         }
         m_animator.add_movement(*iter, p);
     }
+}
+
+bool Game::random_block(Blocks block)
+{
+    if (!can_play())
+        return false;
+    std::vector<int> poss;
+    for (size_t i = 0; i < Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y; ++i)
+        if (m_state[i / Definitions::BLOCK_COUNT_X][i % Definitions::BLOCK_COUNT_Y] == 0)
+            poss.push_back(i);
+    if (poss.size() == 0)
+        return false;
+    size_t pos = poss[rand() % poss.size()];
+    m_state[pos / Definitions::BLOCK_COUNT_X][pos % Definitions::BLOCK_COUNT_Y] = block;
+    m_rects.emplace_back(get_block_coords(pos / Definitions::BLOCK_COUNT_X, pos % Definitions::BLOCK_COUNT_Y), Definitions::BLOCK_COLORS[block]);
+    return true;
+}
+
+void Game::restart()
+{
+    m_state = State(Definitions::BLOCK_COUNT_X, std::vector<int>(Definitions::BLOCK_COUNT_Y, 0));
+    m_rects.clear();
+    start();
 }

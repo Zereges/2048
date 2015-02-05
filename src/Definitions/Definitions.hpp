@@ -8,6 +8,7 @@ class Rect;
 struct Color;
 
 typedef std::vector<Rect> Rects;
+typedef std::vector<std::vector<int>> State;
 
 enum Directions
 {
@@ -15,6 +16,27 @@ enum Directions
     RIGHT,
     UP,
     DOWN,
+};
+
+enum Blocks
+{
+    BLOCK_2 = 1,
+    BLOCK_4,
+    BLOCK_8,
+    BLOCK_16,
+    BLOCK_32,
+    BLOCK_64,
+    BLOCK_128,
+    BLOCK_256,
+    BLOCK_512,
+    BLOCK_1024,
+    BLOCK_2048,
+    BLOCK_4096,
+    BLOCK_8192,
+    BLOCK_16384,
+    BLOCK_32768,
+    BLOCK_65536,
+    BLOCK_131072,
 };
 
 /*  
@@ -42,7 +64,10 @@ class Definitions
 
         static const Color BACKGROUND_COLOR;            // Background color of window.
 
-        static const int DEFAULT_MOVE_SPEED;
+        static const int DEFAULT_MOVE_SPEED;            // Default move speed of blocks in pixels per frame
+
+        static const int BLOCK_4_SPAWN_CHANCE;          // Chance of spawning BLOCK_4 instead of BLOCK_2
+        static const int DEFAULT_START_BLOCKS;          // Count of blocks given to player at start.
 
     private:
         Definitions() = delete; // To make it abstract
@@ -52,6 +77,11 @@ class Definitions
 inline unsigned int logb(unsigned int val)
 {
     return (unsigned int) trunc(log2(val));
+}
+
+inline bool chance(int c)
+{
+    return rand() % 100 < c;
 }
 
 #endif // _DEFINITIONS_HPP_

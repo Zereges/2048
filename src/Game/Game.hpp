@@ -25,13 +25,22 @@ class Game
                      Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SPACE + Definitions::BLOCK_SIZE_Y)
                    };
         }
+        // Starts new game.
+        void start();
         void animate() { m_animator.animate(); }
         bool can_play() { return m_animator.can_play(); }
         void play(Directions direction);
+        // Inserts random block on board and updates state.
+        // Param: block - Block to insert
+        // Returns: true on success, false on failure (full board, can't play)
+        bool random_block(Blocks block);
+        // Removes all progress in current game and starts new one.
+        void restart();
 
     private:
         Rects m_background;
         Rects m_rects;
+        State m_state;
         Animator m_animator;
 };
 

@@ -7,10 +7,11 @@
 bool Program::m_is_running = false;
 int Program::m_ret_value = EXIT_SUCCESS;
 
-int Program::start()
+int Program::start(const std::vector<std::string>& args)
 {
     const Window& window = Window::get_single();
     Game game;
+    game.start();
     m_is_running = true;
     SDL_Event event;
     while (is_running())
