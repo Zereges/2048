@@ -24,7 +24,13 @@ void Window::clear() const
     SDL_RenderClear(const_cast<SDL_Renderer*>(m_renderer));
 }
 
-void Window::add(Rects objects) const
+void Window::add(const Rects& objects) const
+{
+    for (auto iter = cbegin(objects); iter != cend(objects); ++iter)
+        iter->draw();
+}
+
+void Window::add(const NumberedRects& objects) const
 {
     for (auto iter = cbegin(objects); iter != cend(objects); ++iter)
         iter->draw();

@@ -4,7 +4,6 @@
 #include <SDL.h>
 #include "..\Definitions\Definitions.hpp"
 
-
 /*
  *  Singleton wrapper around SDL_Window and SDL_Renderer allowing creation and drawing on window.
  */
@@ -14,7 +13,8 @@ class Window
         static const Window& get_single();
         const SDL_Renderer* get_renderer() const { return m_renderer; }
         void clear() const;
-        void add(Rects background) const;
+        void add(const Rects& background) const;
+        void add(const NumberedRects& blocks) const;
         void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
         ~Window();
 

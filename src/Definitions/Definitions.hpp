@@ -5,10 +5,12 @@
 #include <vector>
 
 class Rect;
+class NumberedRect;
 struct Color;
 
 typedef std::vector<Rect> Rects;
-typedef std::vector<std::vector<int>> State;
+typedef std::vector<NumberedRect> NumberedRects;
+typedef std::vector<std::vector<const Rect*>> State;
 
 enum Directions
 {
@@ -67,7 +69,7 @@ class Definitions
         static const int DEFAULT_MOVE_SPEED;            // Default move speed of blocks in pixels per frame
 
         static const int BLOCK_4_SPAWN_CHANCE;          // Chance of spawning BLOCK_4 instead of BLOCK_2
-        static const int DEFAULT_START_BLOCKS;          // Count of blocks given to player at start.
+        static const int DEFAULT_START_BLOCKS;          // Blocks given to player at start.
 
     private:
         Definitions() = delete; // To make it abstract

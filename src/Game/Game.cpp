@@ -14,7 +14,7 @@ Game::Game()
                 Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SIZE_Y + Definitions::BLOCK_SPACE),
                 Definitions::BLOCK_COLORS[0]);
         }
-    m_state.resize(Definitions::BLOCK_COUNT_X, std::vector<int>(Definitions::BLOCK_COUNT_Y, 0));
+    m_state.resize(Definitions::BLOCK_COUNT_X, std::vector<const Rect*>(Definitions::BLOCK_COUNT_Y, nullptr));
 }
 
 void Game::event_handler(const SDL_Event& event)
@@ -97,14 +97,14 @@ bool Game::random_block(Blocks block)
     if (poss.size() == 0)
         return false;
     size_t pos = poss[rand() % poss.size()];
-    m_state[pos / Definitions::BLOCK_COUNT_X][pos % Definitions::BLOCK_COUNT_Y] = block;
-    m_rects.emplace_back(get_block_coords(pos / Definitions::BLOCK_COUNT_X, pos % Definitions::BLOCK_COUNT_Y), Definitions::BLOCK_COLORS[block]);
+    m_rects.emplace_back(get_block_coords(pos / Definitions::BLOCK_COUNT_X, pos % Definitions::BLOCK_COUNT_Y), block);
+    m_state[pos / Definitions::BLOCK_COUNT_X][pos % Definitions::BLOCK_COUNT_Y] = &(m_rects[m_rects.size() - 1]);
     return true;
 }
 
 void Game::restart()
 {
-    m_state = State(Definitions::BLOCK_COUNT_X, std::vector<int>(Definitions::BLOCK_COUNT_Y, 0));
+    m_state = State(Definitions::BLOCK_COUNT_X, std::vector<const Rect*>(Definitions::BLOCK_COUNT_Y, nullptr));
     m_rects.clear();
     start();
 }
