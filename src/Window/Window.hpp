@@ -14,7 +14,7 @@ class Window
         const SDL_Renderer* get_renderer() const { return m_renderer; }
         void clear() const;
         void add(const Rects& background) const;
-        void add(const NumberedRects& blocks) const;
+        void add(const NumberedRects& rects) const;
         void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
         ~Window();
 

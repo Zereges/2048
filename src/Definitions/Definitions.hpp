@@ -3,14 +3,14 @@
 #include <string>
 #include <math.h>
 #include <vector>
+#include <memory>
 
 class Rect;
 class NumberedRect;
 struct Color;
 
 typedef std::vector<Rect> Rects;
-typedef std::vector<NumberedRect> NumberedRects;
-typedef std::vector<std::vector<const Rect*>> State;
+typedef std::vector<std::vector<std::shared_ptr<NumberedRect> > > NumberedRects;
 
 enum Directions
 {

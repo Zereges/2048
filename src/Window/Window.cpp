@@ -33,5 +33,7 @@ void Window::add(const Rects& objects) const
 void Window::add(const NumberedRects& objects) const
 {
     for (auto iter = cbegin(objects); iter != cend(objects); ++iter)
-        iter->draw();
+        for (auto jter = cbegin(*iter); jter != cend(*iter); ++jter)
+            if (*jter != nullptr)
+                (*jter)->draw();
 }

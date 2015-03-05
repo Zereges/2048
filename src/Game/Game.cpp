@@ -14,7 +14,7 @@ Game::Game()
                 Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SIZE_Y + Definitions::BLOCK_SPACE),
                 Definitions::BLOCK_COLORS[0]);
         }
-    m_state.resize(Definitions::BLOCK_COUNT_X, std::vector<const Rect*>(Definitions::BLOCK_COUNT_Y, nullptr));
+    m_rects.resize(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
 }
 
 void Game::event_handler(const SDL_Event& event)
@@ -60,30 +60,31 @@ void Game::play(Directions direction)
     if (!can_play())
         return;
 
-    for (auto iter = begin(m_rects); iter != end(m_rects); ++iter)
+    // case LEFT:
+    for (std::size_t y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
     {
-        SDL_Point p;
-        switch (direction) // ToDo: here
+        for (std::size_t x = 1; x < Definitions::BLOCK_COUNT_X; ++x)
         {
-            case LEFT:
-                p = get_block_coords(0, 0);
-                p.y = iter->get_rect().y;
-                break;
-            case RIGHT:
-                p = get_block_coords(Definitions::BLOCK_COUNT_X - 1, 0);
-                p.y = iter->get_rect().y;
-                break;
-            case UP:
-                p = get_block_coords(0, 0);
-                p.x = iter->get_rect().x;
-                break;
-            case DOWN:
-                p = get_block_coords(0, Definitions::BLOCK_COUNT_Y - 1);
-                p.x = iter->get_rect().x;
-                break;
+            if (m_rects[x][y] == nullptr)
+                continue;
+            std::size_t i = x;
+            while (i != 0 && m_rects[i - 1][y] != nullptr) --i;
+            move_to(*m_rects[x][y], i, y);
         }
-        m_animator.add_movement(*iter, p);
     }
+
+    on_turn_end();
+}
+
+void Game::on_turn_end()
+{
+
+}
+
+void Game::move_to(NumberedRect& rect, std::size_t x, std::size_t y)
+{
+    m_animator.add_movement(rect, get_block_coords(x, y));
+    *m_rects[x][y] = std::move(rect);
 }
 
 bool Game::random_block(Blocks block)
@@ -92,19 +93,18 @@ bool Game::random_block(Blocks block)
         return false;
     std::vector<int> poss;
     for (size_t i = 0; i < Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y; ++i)
-        if (m_state[i / Definitions::BLOCK_COUNT_X][i % Definitions::BLOCK_COUNT_Y] == 0)
+        if (m_rects[i / Definitions::BLOCK_COUNT_X][i % Definitions::BLOCK_COUNT_Y] == nullptr)
             poss.push_back(i);
     if (poss.size() == 0)
         return false;
     size_t pos = poss[rand() % poss.size()];
-    m_rects.emplace_back(get_block_coords(pos / Definitions::BLOCK_COUNT_X, pos % Definitions::BLOCK_COUNT_Y), block);
-    m_state[pos / Definitions::BLOCK_COUNT_X][pos % Definitions::BLOCK_COUNT_Y] = &(m_rects[m_rects.size() - 1]);
+    m_rects[pos / Definitions::BLOCK_COUNT_X][pos % Definitions::BLOCK_COUNT_Y] =
+        std::make_shared<NumberedRect>(get_block_coords(pos / Definitions::BLOCK_COUNT_X, pos % Definitions::BLOCK_COUNT_Y), block);
     return true;
 }
 
 void Game::restart()
 {
-    m_state = State(Definitions::BLOCK_COUNT_X, std::vector<const Rect*>(Definitions::BLOCK_COUNT_Y, nullptr));
-    m_rects.clear();
+    m_rects = NumberedRects(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
     start();
 }
