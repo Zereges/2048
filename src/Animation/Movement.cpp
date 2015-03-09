@@ -2,7 +2,7 @@
 
 bool Movement::move()
 {
-    SDL_Rect& rect = m_rect.get_rect();
+    SDL_Rect& rect = m_rect->get_rect();
 
     if (m_point.x - rect.x > m_speed)
         rect.x += m_speed;

@@ -13,7 +13,7 @@ class Movement
 {
     public:
         Movement(Rect& rect, const SDL_Point& point, int speed = Definitions::DEFAULT_MOVE_SPEED) :
-            m_rect(rect), m_point(point), m_speed(speed) { }
+            m_rect(&rect), m_point(point), m_speed(speed) {  }
         Movement(const Movement& m) : m_rect(m.m_rect), m_point(m.m_point), m_speed(m.m_speed) { }
         Movement& operator=(const Movement& m) { m_rect = m.m_rect; m_point = m.m_point; m_speed = m.m_speed; return *this; }
 
@@ -24,8 +24,7 @@ class Movement
         bool move();
 
     private:
-
-        Rect& m_rect;
+        Rect* m_rect;
         SDL_Point m_point;
         int m_speed;
 };

@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <vector>
 #include <exception>
+#include <iostream>
 #include "..\Definitions\Definitions.hpp"
 #include "..\Definitions\Rect.hpp"
 #include "..\Definitions\NumberedRect.hpp"
@@ -66,9 +67,16 @@ class Game
         // Params: direction - Direction which player decided to play.
         void play(Directions direction);
 
-        // Inserts random block on board and updates state.
-        // Params: block - Block to insert
-        // Returns: true on success, false on failure (full board, can't play)
+        // Inserts block on given coords
+        // Params: block - Block to insert.
+        //         x - x coord
+        //         y - y coord
+        // Return: true on success, false on failure
+        bool spawn_block(Blocks block, std::size_t x, std::size_t y);
+
+        // Inserts random block on board.
+        // Params: block - Block to insert.
+        // Returns: true on success, false on failure (full board, can't play).
         bool random_block(Blocks block);
 
         // Removes all progress in current game and starts new one.
@@ -83,10 +91,27 @@ class Game
         Animator m_animator;   // Animator class handling movement animtions.
 
         // Passes movement request to animator class.
-        // Params: rect - NumberedRect to move.
-        //         x - x coord where to move.
-        //         y - y coord where to move.
-        void move_to(NumberedRect& rect, std::size_t x, std::size_t y);
+        // Params: from_x - x coord of Rect on field.
+        //         from_y - y coord of Rect on field.
+        //         to_x - x coord where to move.
+        //         to_y - y coord where to move.
+        void move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y);
+        void dbg_print(bool verb = false)
+        {
+            for (unsigned int y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
+            {
+                for (unsigned int x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
+                    std::cout << (m_rects[x][y] ? m_rects[x][y]->get_number() : 0) << " ";
+                std::cout << std::endl;
+            }
+            if (verb)
+                for (unsigned int y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
+                    for (unsigned int x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
+                        if (m_rects[x][y])
+                            std::cout << "(" << x << "," << y << "): " << m_rects[x][y]->get_rect().x << ", " << m_rects[x][y]->get_rect().y << std::endl;
+
+            std::cout << std::endl;
+        }
 };
 
 #endif // _GAME_HPP_
