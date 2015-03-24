@@ -11,8 +11,8 @@ class NumberedRect : public Rect
 {
     public:
         NumberedRect(const SDL_Point& point, unsigned int number, std::size_t w = Definitions::BLOCK_SIZE_X, std::size_t h = Definitions::BLOCK_SIZE_Y) :
-            Rect(point, Definitions::BLOCK_COLORS[number], w, h) { m_number = number; }
-        virtual ~NumberedRect() { }
+            Rect(point, Definitions::BLOCK_COLORS[number], w, h), m_number(number) { }
+        virtual ~NumberedRect() = default;
 
         // Gets number representing value of NumberedRect.
         // Returns: number representing value of NumberedRect.

@@ -4,6 +4,7 @@
 #include "../Program/Program.hpp"
 #include "../Definitions/Rect.hpp"
 #include "../Definitions/NumberedRect.hpp"
+#include "../Animation/Movement.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
 Game::Game()
@@ -141,7 +142,7 @@ void Game::move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std
     assert_coords(from_x, from_y);
     assert_coords(to_x, to_y);
     assert(m_rects[from_x][from_y] != nullptr && m_rects[to_x][to_y] == nullptr);
-    m_animator.add_movement(*m_rects[from_x][from_y], get_block_coords(to_x, to_y));
+    m_animator.add<Movement>(*m_rects[from_x][from_y], get_block_coords(to_x, to_y));
     m_rects[to_x][to_y] = m_rects[from_x][from_y];
     m_rects[from_x][from_y] = nullptr;
 }

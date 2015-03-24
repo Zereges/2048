@@ -38,7 +38,7 @@ enum Blocks
     BLOCK_16384,
     BLOCK_32768,
     BLOCK_65536,
-    BLOCK_131072,
+    BLOCK_131072, // Max on 4x4
 };
 
 /*  
@@ -74,6 +74,9 @@ class Definitions
     private:
         Definitions() = delete; // To make it abstract
         Definitions(const Definitions&) = delete;
+        Definitions(Definitions&&) = delete;
+        Definitions& operator=(const Definitions&) = delete;
+        Definitions& operator=(Definitions&&) = delete;
 };
 
 inline unsigned int logb(unsigned int val)

@@ -16,9 +16,13 @@ const std::size_t Definitions::GAME_WIDTH = GAME_X + BLOCK_COUNT_X * BLOCK_SIZE_
 const std::size_t Definitions::GAME_HEIGHT = GAME_Y + BLOCK_COUNT_Y * BLOCK_SIZE_Y + (BLOCK_COUNT_Y + 1) * BLOCK_SPACE;
 
 const std::vector<Color> Definitions::BLOCK_COLORS = {
-    Color(85, 85, 85),    // default empty
+    Color( 85,  85,  85), // default empty
     Color(153, 171, 174), // BLOCK_2
-    Color(128, 200, 185), // BLOCK_4
+    Color( 47, 119,  80), // BLOCK_4
+    Color( 58, 133,  33), // BLOCK_8
+    Color(130, 146,  20), // BLOCK_16
+    Color(156, 105,  10), // BLOCK_32
+    Color(166,  41,   0), // BLOCK_64
 };
 
 const Color Definitions::BACKGROUND_COLOR = Color(30, 30, 30);

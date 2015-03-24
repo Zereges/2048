@@ -5,26 +5,29 @@
 #include <vector>
 #include "../Definitions/Definitions.hpp"
 #include "../Definitions/Rect.hpp"
+#include "Animation.hpp"
 
 /*  
  *  Movement class handling moving of its contents.
  */
-class Movement
+class Movement : public Animation
 {
     public:
         Movement(Rect& rect, const SDL_Point& point, int speed = Definitions::DEFAULT_MOVE_SPEED) :
-            m_rect(&rect), m_point(point), m_speed(speed) {  }
-        Movement(const Movement& m) : m_rect(m.m_rect), m_point(m.m_point), m_speed(m.m_speed) { }
+            Animation(&rect), m_point(point), m_speed(speed) { }
+        Movement(const Movement& m) : Animation(m.m_rect), m_point(m.m_point), m_speed(m.m_speed) { }
         Movement& operator=(const Movement& m) { m_rect = m.m_rect; m_point = m.m_point; m_speed = m.m_speed; return *this; }
+        virtual ~Movement() = default;
 
-        /*
-         * Moves m_rect in m_direction to m_point at m_speed.
-         * Returns: true if movement is completed, false otherwise.
-         */
+        // Virtual method called when animation is required.
+        // Returns: true if animation is finished, false otherwise.
+        virtual bool animate() { return move(); }
+
+        // Moves m_rect in m_direction to m_point at m_speed.
+        // Returns: true if movement is completed, false otherwise.
         bool move();
 
     private:
-        Rect* m_rect;
         SDL_Point m_point;
         int m_speed;
 };

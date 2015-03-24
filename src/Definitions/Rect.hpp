@@ -6,7 +6,7 @@
 #include "../Definitions/Color.hpp"
 
 /*  
- *  Wrapper around SDL_Rect with coloring posibility.
+ *  SDL_Rect wrapper with coloring posibility.
  */
 class Rect
 {
@@ -18,9 +18,9 @@ class Rect
         Rect(const SDL_Point& point, const Color& color, std::size_t w = Definitions::BLOCK_SIZE_X, std::size_t h = Definitions::BLOCK_SIZE_Y) :
             Rect(point.x, point.y, color, w, h) { }
 
-        virtual ~Rect() { }
-        const SDL_Rect& get_rect() const { return m_rect; }
+        virtual ~Rect() = default;
         SDL_Rect& get_rect() { return m_rect; }
+        const SDL_Rect& get_rect() const { return m_rect; }
         const Color& get_color() const { return m_color; }
         virtual void draw() const;
 

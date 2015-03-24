@@ -1,30 +1,30 @@
-#ifndef _ANIMATION_HPP_
-#define _ANIMATION_HPP_
+#ifndef _ANIMATOR_HPP_
+#define _ANIMATOR_HPP_
 #include <SDL.h>
 #include <memory>
 #include <vector>
 #include <algorithm>
 #include "..\Definitions\Definitions.hpp"
 #include "..\Definitions\Rect.hpp"
-#include "Movement.hpp"
+#include "Animation.hpp"
 
 /*  
- *  Animation class handles procession of Moving of Rects.
+ *  Animation class handles procession of animation of Rects.
  */
 class Animator
 {
     public:
-        void add_movement(Rect& rect, const SDL_Point& point, int speed = Definitions::DEFAULT_MOVE_SPEED)
-            { m_movement.emplace_back(rect, point, speed); }
+        template<typename T, typename... Ts>
+        void add(Ts&&... vals) { m_animation.emplace_back(std::make_shared<T>(std::forward<Ts>(vals)...)); } // black magic
         void animate()
         {
-            m_movement.erase(std::remove_if(begin(m_movement), end(m_movement), [](Movement& m){ return m.move(); }), end(m_movement));
+            m_animation.erase(std::remove_if(begin(m_animation), end(m_animation), [](std::shared_ptr<Animation>& m){ return m->animate(); }), end(m_animation));
         }
-        bool can_play() const { return m_movement.empty(); }
+        bool can_play() const { return m_animation.empty(); }
 
     private:
-        std::vector<Movement> m_movement;
+        std::vector<std::shared_ptr<Animation>> m_animation;
 };
 
 
-#endif // _ANIMATION_HPP_
+#endif // _ANIMATOR_HPP_
