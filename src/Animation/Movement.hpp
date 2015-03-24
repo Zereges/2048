@@ -20,12 +20,9 @@ class Movement : public Animation
         virtual ~Movement() = default;
 
         // Virtual method called when animation is required.
+        // Moves m_rect to m_point at m_speed.
         // Returns: true if animation is finished, false otherwise.
-        virtual bool animate() { return move(); }
-
-        // Moves m_rect in m_direction to m_point at m_speed.
-        // Returns: true if movement is completed, false otherwise.
-        bool move();
+        virtual bool animate();
 
     private:
         SDL_Point m_point;

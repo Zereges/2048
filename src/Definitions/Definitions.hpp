@@ -67,6 +67,7 @@ class Definitions
         static const Color BACKGROUND_COLOR;            // Background color of window.
 
         static const int DEFAULT_MOVE_SPEED;            // Default move speed of blocks in pixels per frame
+        static const int DEFAULT_SPAWN_SPEED;           // Default spawn speed of blocks in pixels per frame
 
         static const int BLOCK_4_SPAWN_CHANCE;          // Chance of spawning BLOCK_4 instead of BLOCK_2
         static const int DEFAULT_START_BLOCKS;          // Blocks given to player at start.

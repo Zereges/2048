@@ -1,6 +1,6 @@
 #include "Movement.hpp"
 
-bool Movement::move()
+bool Movement::animate()
 {
     SDL_Rect& rect = m_rect->get_rect();
 
@@ -18,7 +18,5 @@ bool Movement::move()
     else
         rect.y = m_point.y;
 
-    if (rect.x == m_point.x && rect.y == m_point.y)
-        return true;
-    return false;
+    return rect.x == m_point.x && rect.y == m_point.y;
 }

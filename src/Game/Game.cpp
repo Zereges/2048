@@ -5,6 +5,7 @@
 #include "../Definitions/Rect.hpp"
 #include "../Definitions/NumberedRect.hpp"
 #include "../Animation/Movement.hpp"
+#include "../Animation/Spawn.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
 Game::Game()
@@ -161,7 +162,8 @@ bool Game::spawn_block(Blocks block, std::size_t x, std::size_t y)
     assert_coords(x, y);
     if (m_rects[x][y])
         return false;
-    m_rects[x][y] = std::make_shared<NumberedRect>(get_block_coords(x, y), block);
+    m_rects[x][y] = std::make_shared<NumberedRect>(get_block_coords(x, y), block, 0, 0);
+    m_animator.add<Spawn>(*m_rects[x][y], get_block_coords(x, y));
     return true;
 }
 

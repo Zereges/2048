@@ -16,7 +16,7 @@ class Rect
             Rect({x, y, w, h}, color) { }
 
         Rect(const SDL_Point& point, const Color& color, std::size_t w = Definitions::BLOCK_SIZE_X, std::size_t h = Definitions::BLOCK_SIZE_Y) :
-            Rect(point.x, point.y, color, w, h) { }
+            Rect({point.x + (Definitions::BLOCK_SIZE_X - w) / 2, point.y + (Definitions::BLOCK_SIZE_Y - h) / 2, w, h}, color) { }
 
         virtual ~Rect() = default;
         SDL_Rect& get_rect() { return m_rect; }

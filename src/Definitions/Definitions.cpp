@@ -28,5 +28,6 @@ const std::vector<Color> Definitions::BLOCK_COLORS = {
 const Color Definitions::BACKGROUND_COLOR = Color(30, 30, 30);
 
 const int Definitions::DEFAULT_MOVE_SPEED = 5;
+const int Definitions::DEFAULT_SPAWN_SPEED = 1;
 const int Definitions::BLOCK_4_SPAWN_CHANCE = 15;
 const int Definitions::DEFAULT_START_BLOCKS = 2;
