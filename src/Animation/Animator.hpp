@@ -20,7 +20,7 @@ class Animator
         {
             m_movement.erase(std::remove_if(begin(m_movement), end(m_movement), [](Movement& m){ return m.move(); }), end(m_movement));
         }
-        bool can_play() { return m_movement.empty(); }
+        bool can_play() const { return m_movement.empty(); }
 
     private:
         std::vector<Movement> m_movement;

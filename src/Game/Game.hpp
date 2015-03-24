@@ -61,7 +61,7 @@ class Game
 
         // Checks whether player can play.
         // Returns: true if can, false otherwise.
-        bool can_play() { return m_animator.can_play(); }
+        bool can_play() const { return m_animator.can_play(); }
 
         // Processes player's turn.
         // Params: direction - Direction which player decided to play.
@@ -75,9 +75,9 @@ class Game
         bool spawn_block(Blocks block, std::size_t x, std::size_t y);
 
         // Inserts random block on board.
-        // Params: block - Block to insert.
-        // Returns: true on success, false on failure (full board, can't play).
-        bool random_block(Blocks block);
+        // Params: block - Block to insert. Default: BLOCK_4 with BLOCK_4_SPAWN_CHANCE, otherwise BLOCK_2.
+        // Returns: true on success, false on failure (full board).
+        bool random_block(Blocks block = chance(Definitions::BLOCK_4_SPAWN_CHANCE) ? BLOCK_4 : BLOCK_2);
 
         // Removes all progress in current game and starts new one.
         void restart();
@@ -85,17 +85,41 @@ class Game
         // Is called when after player's turn is processed.
         void on_turn_end();
 
+        // Checks whether two NumberedRects can be merged together.
+        // Params: r1 - NumberedRect 1 to check
+        //         r2 - NumberedRect 2 to check
+        // Returns: true if possible, false otherwise
+        bool can_merge(const NumberedRect& r1, const NumberedRect& r2) const { return r1.get_number() == r1.get_number(); }
+
+        // Checks whether two NumberedRects can be merged together.
+        // Params: r1 - pointer to NumberedRect 1 to check
+        //         r2 - pointer to NumberedRect 2 to check
+        // Returns: true if possible, false otherwise
+        bool can_merge(std::shared_ptr<NumberedRect> r1, std::shared_ptr<NumberedRect> r2) const
+        {
+            return r1 != nullptr && r2 != nullptr && r1->get_number() == r1->get_number();
+        }
+        
+
     private:
         Rects m_background;    // Rectangles which forms a background of game.
         NumberedRects m_rects; // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRectangles forming state of a game.
         Animator m_animator;   // Animator class handling movement animtions.
 
-        // Passes movement request to animator class.
+        // Passes movement request to animator class and updates inner state.
         // Params: from_x - x coord of Rect on field.
         //         from_y - y coord of Rect on field.
         //         to_x - x coord where to move.
         //         to_y - y coord where to move.
         void move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y);
+
+        // Passes merge request to animator class and updates inner state.
+        // Params: from_x - x coord of Rect on field.
+        //         from_y - y coord of Rect on field.
+        //         to_x - x coord of Rect to merge.
+        //         to_y - y coord of Rect to merge.
+        void merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y);
+
         void dbg_print(bool verb = false)
         {
             for (unsigned int y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)

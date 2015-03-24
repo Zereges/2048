@@ -1,8 +1,10 @@
 #include <SDL.h>
 #include "Game.hpp"
+#include <assert.h>
 #include "../Program/Program.hpp"
 #include "../Definitions/Rect.hpp"
 #include "../Definitions/NumberedRect.hpp"
+#define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
 Game::Game()
 {
@@ -46,14 +48,14 @@ void Game::key_handler(const SDL_KeyboardEvent& keyevent)
         case SDLK_DOWN: play(DOWN); break;
 
         case SDLK_r: restart(); break; // TBD
-        case SDLK_b: random_block(chance(Definitions::BLOCK_4_SPAWN_CHANCE) ? BLOCK_4 : BLOCK_2); break; // TBD
+        case SDLK_b: random_block(); break; // TBD
     }
 }
 
 void Game::start()
 {
     for (int i = 0; i < Definitions::DEFAULT_START_BLOCKS; ++i)
-        random_block(chance(Definitions::BLOCK_4_SPAWN_CHANCE) ? BLOCK_4 : BLOCK_2);
+        random_block();
 }
 
 void Game::play(Directions direction)
@@ -73,7 +75,12 @@ void Game::play(Directions direction)
                     std::size_t i = x;
                     while (i > 0 && m_rects[i - 1][y] == nullptr) --i;
                     if (m_rects[i][y] == nullptr)
-                        move_to(x, y, i, y);
+                        if (i != 0 && can_merge(m_rects[x][y], m_rects[i - 1][y]))
+                            merge_to(x, y, i - 1, y);
+                        else
+                            move_to(x, y, i, y);
+                    else if (can_merge(m_rects[x][y], m_rects[i][y]))
+                        merge_to(x, y, i, y);
                 }
             }
             break;
@@ -126,20 +133,31 @@ void Game::play(Directions direction)
 
 void Game::on_turn_end()
 {
-
+    random_block();
 }
 
 void Game::move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y)
 {
-    // ToDo: assert(m_rects[from_x][from_y] == nullptr);
+    assert_coords(from_x, from_y);
+    assert_coords(to_x, to_y);
+    assert(m_rects[from_x][from_y] != nullptr && m_rects[to_x][to_y] == nullptr);
     m_animator.add_movement(*m_rects[from_x][from_y], get_block_coords(to_x, to_y));
     m_rects[to_x][to_y] = m_rects[from_x][from_y];
     m_rects[from_x][from_y] = nullptr;
 }
 
+void Game::merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y)
+{
+    assert_coords(from_x, from_y);
+    assert_coords(to_x, to_y);
+    assert(m_rects[from_x][from_y] != nullptr && m_rects[to_x][to_y] != nullptr);
+    m_rects[to_x][to_y]->next_number();
+    m_rects[from_x][from_y] = nullptr;
+}
+
 bool Game::spawn_block(Blocks block, std::size_t x, std::size_t y)
 {
-    // assert(coords);
+    assert_coords(x, y);
     if (m_rects[x][y])
         return false;
     m_rects[x][y] = std::make_shared<NumberedRect>(get_block_coords(x, y), block);
@@ -148,8 +166,6 @@ bool Game::spawn_block(Blocks block, std::size_t x, std::size_t y)
 
 bool Game::random_block(Blocks block)
 {
-    if (!can_play())
-        return false;
     std::vector<int> poss;
     for (size_t i = 0; i < Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y; ++i)
         if (m_rects[i / Definitions::BLOCK_COUNT_X][i % Definitions::BLOCK_COUNT_Y] == nullptr)
