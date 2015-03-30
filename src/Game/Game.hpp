@@ -97,7 +97,7 @@ class Game
         // Returns: true if possible, false otherwise
         bool can_merge(std::shared_ptr<NumberedRect> r1, std::shared_ptr<NumberedRect> r2) const
         {
-            return r1 != nullptr && r2 != nullptr && r1->get_number() == r1->get_number();
+            return r1 != nullptr && r2 != nullptr && r1->get_number() == r2->get_number();
         }
         
 

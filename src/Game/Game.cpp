@@ -75,14 +75,11 @@ void Game::play(Directions direction)
                     if (m_rects[x][y] == nullptr)
                         continue;
                     std::size_t i = x;
-                    while (i > 0 && m_rects[i - 1][y] == nullptr) --i;
-                    if (m_rects[i][y] == nullptr)
-                        if (i != 0 && can_merge(m_rects[x][y], m_rects[i - 1][y]))
-                            merge_to(x, y, i - 1, y);
-                        else
-                            move_to(x, y, i, y);
-                    else if (can_merge(m_rects[x][y], m_rects[i][y]))
+                    while (i > 0 && m_rects[--i][y] == nullptr); // find closest block
+                    if (can_merge(m_rects[x][y], m_rects[i][y]))
                         merge_to(x, y, i, y);
+                    else if (m_rects[i][y] == nullptr || m_rects[++i][y] == nullptr)
+                        move_to(x, y, i, y);
                 }
             }
             break;
@@ -94,8 +91,10 @@ void Game::play(Directions direction)
                     if (m_rects[x][y] == nullptr)
                         continue;
                     std::size_t i = x;
-                    while (i < Definitions::BLOCK_COUNT_X - 1 && m_rects[i + 1][y] == nullptr) ++i;
-                    if (m_rects[i][y] == nullptr)
+                    while (i < Definitions::BLOCK_COUNT_X - 1 && m_rects[++i][y] == nullptr);
+                    if (can_merge(m_rects[x][y], m_rects[i][y]))
+                        merge_to(x, y, i, y);
+                    else if (m_rects[i][y] == nullptr || m_rects[--i][y] == nullptr)
                         move_to(x, y, i, y);
                 }
             }
@@ -108,8 +107,10 @@ void Game::play(Directions direction)
                     if (m_rects[x][y] == nullptr)
                         continue;
                     std::size_t i = y;
-                    while (i > 0 && m_rects[x][i - 1] == nullptr) --i;
-                    if (m_rects[x][i] == nullptr)
+                    while (i > 0 && m_rects[x][--i] == nullptr); // find closest block
+                    if (can_merge(m_rects[x][y], m_rects[x][i]))
+                        merge_to(x, y, x, i);
+                    else if (m_rects[x][i] == nullptr || m_rects[x][++i] == nullptr)
                         move_to(x, y, x, i);
                 }
             }
@@ -122,8 +123,10 @@ void Game::play(Directions direction)
                     if (m_rects[x][y] == nullptr)
                         continue;
                     std::size_t i = y;
-                    while (i < Definitions::BLOCK_COUNT_Y - 1 && m_rects[x][i + 1] == nullptr) ++i;
-                    if (m_rects[x][i] == nullptr)
+                    while (i < Definitions::BLOCK_COUNT_Y - 1 && m_rects[x][++i] == nullptr);
+                    if (can_merge(m_rects[x][y], m_rects[x][i]))
+                        merge_to(x, y, x, i);
+                    else if (m_rects[x][i] == nullptr || m_rects[x][--i] == nullptr)
                         move_to(x, y, x, i);
                 }
             }
