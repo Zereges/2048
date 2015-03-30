@@ -84,7 +84,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Animation\Movement.cpp" />
+    <ClCompile Include="src\Animation\Merge.cpp" />
+    <ClCompile Include="src\Animation\Move.cpp" />
     <ClCompile Include="src\Animation\Spawn.cpp" />
     <ClCompile Include="src\Definitions\Definitions.cpp" />
     <ClCompile Include="src\Definitions\Rect.cpp" />
@@ -96,7 +97,8 @@
   <ItemGroup>
     <ClInclude Include="src\Animation\Animation.hpp" />
     <ClInclude Include="src\Animation\Animator.hpp" />
-    <ClInclude Include="src\Animation\Movement.hpp" />
+    <ClInclude Include="src\Animation\Merge.hpp" />
+    <ClInclude Include="src\Animation\Move.hpp" />
     <ClInclude Include="src\Animation\Spawn.hpp" />
     <ClInclude Include="src\Definitions\Color.hpp" />
     <ClInclude Include="src\Definitions\Definitions.hpp" />

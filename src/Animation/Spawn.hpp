@@ -8,7 +8,7 @@
 #include "Animation.hpp"
 
 /*  
- *  Movement class handling moving of its contents.
+ *  Spawn class handling animation of spawning of new blocks.
  */
 class Spawn : public Animation
 {
@@ -17,7 +17,7 @@ class Spawn : public Animation
             std::size_t size_y = Definitions::BLOCK_SIZE_X, int speed = Definitions::DEFAULT_SPAWN_SPEED) :
             Animation(&rect), m_point(point), m_size_x(size_x), m_size_y(size_y), m_speed(speed) { }
         Spawn(const Spawn& s) : Animation(s.m_rect), m_size_x(s.m_size_x), m_size_y(s.m_size_y), m_speed(s.m_speed), m_point(s.m_point) { }
-        Spawn& operator=(const Spawn& s) { m_rect = s.m_rect; m_size_x = s.m_size_x; m_size_y = s.m_size_y; m_speed = s.m_speed; return *this; }
+        Spawn& operator=(const Spawn&) = default;
         virtual ~Spawn() = default;
 
         // Virtual method called when animation is required.

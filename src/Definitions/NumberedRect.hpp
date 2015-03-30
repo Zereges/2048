@@ -11,7 +11,7 @@ class NumberedRect : public Rect
 {
     public:
         NumberedRect(const SDL_Point& point, unsigned int number, std::size_t w = Definitions::BLOCK_SIZE_X, std::size_t h = Definitions::BLOCK_SIZE_Y) :
-            Rect(point, Definitions::BLOCK_COLORS[number], w, h), m_number(number) { }
+            Rect(point, Definitions::get_block_color(number), w, h), m_number(number) { }
         virtual ~NumberedRect() = default;
 
         // Gets number representing value of NumberedRect.
@@ -19,7 +19,7 @@ class NumberedRect : public Rect
         unsigned int get_number() const { return m_number; }
         
         // Increments number of NumberedRect to next value.
-        void next_number() { m_color = Definitions::BLOCK_COLORS[++m_number]; }
+        void next_number() { m_color = Definitions::get_block_color(++m_number); }
         virtual void draw() const { Rect::draw(); }
 
     private:

@@ -4,8 +4,9 @@
 #include "../Program/Program.hpp"
 #include "../Definitions/Rect.hpp"
 #include "../Definitions/NumberedRect.hpp"
-#include "../Animation/Movement.hpp"
+#include "../Animation/Move.hpp"
 #include "../Animation/Spawn.hpp"
+#include "../Animation/Merge.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
 Game::Game()
@@ -16,7 +17,7 @@ Game::Game()
         {
             m_background.emplace_back(Definitions::GAME_X + Definitions::BLOCK_SPACE + x * (Definitions::BLOCK_SIZE_X + Definitions::BLOCK_SPACE),
                 Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SIZE_Y + Definitions::BLOCK_SPACE),
-                Definitions::BLOCK_COLORS[0]);
+                Definitions::get_block_color(0));
         }
     m_rects.resize(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
 }
@@ -146,7 +147,7 @@ void Game::move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std
     assert_coords(from_x, from_y);
     assert_coords(to_x, to_y);
     assert(m_rects[from_x][from_y] != nullptr && m_rects[to_x][to_y] == nullptr);
-    m_animator.add<Movement>(*m_rects[from_x][from_y], get_block_coords(to_x, to_y));
+    m_animator.add<Move>(*m_rects[from_x][from_y], get_block_coords(to_x, to_y));
     m_rects[to_x][to_y] = m_rects[from_x][from_y];
     m_rects[from_x][from_y] = nullptr;
 }
@@ -156,6 +157,7 @@ void Game::merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, st
     assert_coords(from_x, from_y);
     assert_coords(to_x, to_y);
     assert(m_rects[from_x][from_y] != nullptr && m_rects[to_x][to_y] != nullptr);
+    m_animator.add<Merge>(*m_rects[to_x][to_y]);
     m_rects[to_x][to_y]->next_number();
     m_rects[from_x][from_y] = nullptr;
 }

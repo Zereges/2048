@@ -1,6 +1,6 @@
-#include "Movement.hpp"
+#include "Move.hpp"
 
-bool Movement::animate()
+bool Move::animate()
 {
     SDL_Rect& rect = m_rect->get_rect();
 

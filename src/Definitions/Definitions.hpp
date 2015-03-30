@@ -4,10 +4,10 @@
 #include <math.h>
 #include <vector>
 #include <memory>
+#include "Color.hpp"
 
 class Rect;
 class NumberedRect;
-struct Color;
 
 typedef std::vector<Rect> Rects;
 typedef std::vector<std::vector<std::shared_ptr<NumberedRect> > > NumberedRects;
@@ -68,9 +68,13 @@ class Definitions
 
         static const int DEFAULT_MOVE_SPEED;            // Default move speed of blocks in pixels per frame
         static const int DEFAULT_SPAWN_SPEED;           // Default spawn speed of blocks in pixels per frame
+        static const int DEFAULT_MERGE_SPEED;           // Default merge speed of blocks in pixels per frame
+        static const int DEFAULT_MERGE_ENLARGEMENT;     // Default percentual enlargement of merged block.
 
         static const int BLOCK_4_SPAWN_CHANCE;          // Chance of spawning BLOCK_4 instead of BLOCK_2
         static const int DEFAULT_START_BLOCKS;          // Blocks given to player at start.
+
+        static Color get_block_color(unsigned int number) { return number < BLOCK_COLORS.size() ? BLOCK_COLORS[number] : BLOCK_COLORS[BLOCK_COLORS.size() - 1]; }
 
     private:
         Definitions() = delete; // To make it abstract
