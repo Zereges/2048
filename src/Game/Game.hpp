@@ -9,6 +9,7 @@
 #include "..\Definitions\NumberedRect.hpp"
 #include "..\Animation\Animator.hpp"
 #include "..\Window\Window.hpp"
+#include "..\Stats\Stats.hpp"
 
 /*  
  *  Game class handling user events.
@@ -115,6 +116,8 @@ class Game
         NumberedRects m_rects; // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRects forming state of a game.
         Animator m_animator;   // Animator class handling movement animtions.
         bool m_canplay;        // Tells whether player game is being played.
+
+        Stats m_stats;         // Stats regarding current game.
 
         // Passes movement request to animator class and updates inner state.
         // Params: from_x - x coord of Rect on field.

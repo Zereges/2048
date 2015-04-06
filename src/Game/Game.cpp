@@ -74,6 +74,8 @@ void Game::play(Directions direction)
     if (!can_play())
         return;
 
+    m_stats.play(direction);
+
     switch (direction)
     {
         case LEFT:
@@ -160,6 +162,8 @@ void Game::move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std
     m_animator.add<Move>(*m_rects[from_x][from_y], get_block_coords(to_x, to_y));
     m_rects[to_x][to_y] = m_rects[from_x][from_y];
     m_rects[from_x][from_y] = nullptr;
+
+    m_stats.move();
 }
 
 void Game::merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y)
@@ -170,6 +174,8 @@ void Game::merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, st
     m_animator.add<Merge>(*m_rects[to_x][to_y]);
     m_rects[to_x][to_y]->next_number();
     m_rects[from_x][from_y] = nullptr;
+
+    m_stats.merge();
 }
 
 bool Game::spawn_block(Blocks block, std::size_t x, std::size_t y)
@@ -179,6 +185,7 @@ bool Game::spawn_block(Blocks block, std::size_t x, std::size_t y)
         return false;
     m_rects[x][y] = std::make_shared<NumberedRect>(get_block_coords(x, y), block, 0, 0);
     m_animator.add<Spawn>(*m_rects[x][y], get_block_coords(x, y));
+
     return true;
 }
 
@@ -198,6 +205,7 @@ bool Game::random_block(Blocks block)
 void Game::restart()
 {
     m_canplay = false;
+    m_stats.restart();
     m_rects = NumberedRects(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
     start();
 }

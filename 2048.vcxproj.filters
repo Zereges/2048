@@ -15,26 +15,20 @@
     <Filter Include="Source Files\Animation">
       <UniqueIdentifier>{a326fbc7-fa06-45d5-8504-a1dac9029eec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{4357ca89-d0e6-4afc-bbb5-8581d47dba3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Defs">
+      <UniqueIdentifier>{2258f1ae-4f0f-43dc-807b-2a2d8579b945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{75e16c78-57e1-4dba-90b6-5d8e52a3199d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Defs">
+      <UniqueIdentifier>{44680f96-8f68-4b58-9537-d48861c2afce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Definitions\Definitions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Program\Program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Window\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Definitions\Rect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Animation\Spawn.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
@@ -44,29 +38,29 @@
     <ClCompile Include="src\Animation\Move.cpp">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game\Game.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window\Window.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Program\Program.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Definitions\Definitions.cpp">
+      <Filter>Source Files\Defs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Definitions\Rect.cpp">
+      <Filter>Source Files\Defs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stats\Stats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Window\Window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Definitions\Definitions.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Program\Program.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game\Game.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Definitions\Rect.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Definitions\Color.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Definitions\NumberedRect.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Animation\Animation.hpp">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
@@ -81,6 +75,30 @@
     </ClInclude>
     <ClInclude Include="src\Animation\Move.hpp">
       <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stats\Stats.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game\Game.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Program\Program.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window\Window.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Definitions\Color.hpp">
+      <Filter>Header Files\Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Definitions\Definitions.hpp">
+      <Filter>Header Files\Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Definitions\NumberedRect.hpp">
+      <Filter>Header Files\Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Definitions\Rect.hpp">
+      <Filter>Header Files\Defs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
