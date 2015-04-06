@@ -11,7 +11,7 @@
 
 Game::Game() : m_canplay(false)
 {
-    m_background.emplace_back(Definitions::GAME_X, Definitions::GAME_Y, Definitions::BACKGROUND_COLOR, Definitions::GAME_WIDTH, Definitions::GAME_HEIGHT);
+    m_background.emplace_back(0, 0, Definitions::BACKGROUND_COLOR, Definitions::GAME_WIDTH, Definitions::GAME_HEIGHT);
     for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
         for (std::size_t y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
         {
