@@ -8,6 +8,8 @@
 #include "..\Definitions\Rect.hpp"
 #include "..\Definitions\NumberedRect.hpp"
 #include "..\Animation\Animator.hpp"
+#include "..\Window\Window.hpp"
+
 /*  
  *  Game class handling user events.
  */
@@ -61,7 +63,7 @@ class Game
 
         // Checks whether player can play.
         // Returns: true if can, false otherwise.
-        bool can_play() const { return m_animator.can_play(); }
+        bool can_play() const { return m_animator.can_play() && m_canplay; }
 
         // Processes player's turn.
         // Params: direction - Direction which player decided to play.
@@ -99,12 +101,20 @@ class Game
         {
             return r1 != nullptr && r2 != nullptr && r1->get_number() == r2->get_number();
         }
+
+        // Checks whether player caused Game Over.
+        // Returns: true if game is over, false otherwise.
+        bool is_game_over();
+
+        // Stops the game play and prints result.
+        void stop() { m_canplay = false; /* Game Over */ }
         
 
     private:
         Rects m_background;    // Rectangles which forms a background of game.
-        NumberedRects m_rects; // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRectangles forming state of a game.
+        NumberedRects m_rects; // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRects forming state of a game.
         Animator m_animator;   // Animator class handling movement animtions.
+        bool m_canplay;        // Tells whether player game is being played.
 
         // Passes movement request to animator class and updates inner state.
         // Params: from_x - x coord of Rect on field.

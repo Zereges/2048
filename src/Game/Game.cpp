@@ -9,7 +9,7 @@
 #include "../Animation/Merge.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
-Game::Game()
+Game::Game() : m_canplay(false)
 {
     m_background.emplace_back(Definitions::GAME_X, Definitions::GAME_Y, Definitions::BACKGROUND_COLOR, Definitions::GAME_WIDTH, Definitions::GAME_HEIGHT);
     for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
@@ -52,6 +52,13 @@ void Game::key_handler(const SDL_KeyboardEvent& keyevent)
 
         case SDLK_r: restart(); break; // TBD
         case SDLK_b: random_block(); break; // TBD
+        case SDLK_s: stop(); break; // TBD
+        case SDLK_e: // TBD
+            m_rects = NumberedRects(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
+            for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
+                for (std::size_t y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
+                    m_rects[x][y] = std::make_shared<NumberedRect>(get_block_coords(x, y), ((x + y) % 2) ? 2 : 1);
+            break;
     }
 }
 
@@ -59,6 +66,7 @@ void Game::start()
 {
     for (int i = 0; i < Definitions::DEFAULT_START_BLOCKS; ++i)
         random_block();
+    m_canplay = true;
 }
 
 void Game::play(Directions direction)
@@ -140,6 +148,8 @@ void Game::play(Directions direction)
 void Game::on_turn_end()
 {
     random_block();
+    if (is_game_over())
+        stop();
 }
 
 void Game::move_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y)
@@ -175,7 +185,7 @@ bool Game::spawn_block(Blocks block, std::size_t x, std::size_t y)
 bool Game::random_block(Blocks block)
 {
     std::vector<int> poss;
-    for (size_t i = 0; i < Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y; ++i)
+    for (std::size_t i = 0; i < Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y; ++i)
         if (m_rects[i / Definitions::BLOCK_COUNT_X][i % Definitions::BLOCK_COUNT_Y] == nullptr)
             poss.push_back(i);
     if (poss.size() == 0)
@@ -187,6 +197,26 @@ bool Game::random_block(Blocks block)
 
 void Game::restart()
 {
+    m_canplay = false;
     m_rects = NumberedRects(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
     start();
+}
+
+bool Game::is_game_over()
+{
+    for (auto i = m_rects.begin(); i != m_rects.end(); ++i)
+        for (auto j = i->begin(); j != i->end(); ++j)
+            if ((*j) == nullptr)
+                return false;
+    // Board is full, looking for merge.
+    for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X - 1; ++x)
+        for (std::size_t y = 0; y < Definitions::BLOCK_COUNT_Y - 1; ++y)
+        {
+            if (can_merge(m_rects[x][y], m_rects[x][y + 1]))
+                return false;
+            if (can_merge(m_rects[x][y], m_rects[x + 1][y]))
+                return false;
+        }
+
+    return true;
 }
