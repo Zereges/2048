@@ -33,3 +33,4 @@
 *.suo
 Release/*
 Debug/*
+*.ttf
