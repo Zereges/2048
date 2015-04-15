@@ -1,11 +1,11 @@
 #ifndef _DEFINITIONS_HPP_
 #define _DEFINITIONS_HPP_
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include <string>
 #include <math.h>
 #include <vector>
 #include <memory>
-#include "Color.hpp"
-
 class Rect;
 class NumberedRect;
 
@@ -47,34 +47,37 @@ enum Blocks
 class Definitions
 {
     public:
-        static const std::string WINDOW_NAME;           // Window name.
-        static const std::size_t WINDOW_WIDTH;          // Total window width.
-        static const std::size_t WINDOW_HEIGHT;         // Total window height.
+        static const std::string WINDOW_NAME;               // Window name.
+        static const std::size_t WINDOW_WIDTH;              // Total window width.
+        static const std::size_t WINDOW_HEIGHT;             // Total window height.
 
-        static const std::size_t GAME_X;                // X-Coord where Game begins.
-        static const std::size_t GAME_Y;                // Y-Coord where Game begins.
+        static const std::size_t GAME_X;                    // X-Coord where Game begins.
+        static const std::size_t GAME_Y;                    // Y-Coord where Game begins.
 
-        static const std::size_t GAME_WIDTH;            // Game width.
-        static const std::size_t GAME_HEIGHT;           // Game height.
+        static const std::size_t GAME_WIDTH;                // Game width.
+        static const std::size_t GAME_HEIGHT;               // Game height.
 
-        static const std::size_t BLOCK_COUNT_X;         // Number of blocks in each horizontal line.
-        static const std::size_t BLOCK_COUNT_Y;         // Number of blocks in each vertical line.
-        static const std::size_t BLOCK_SIZE_X;          // Horizontal size of a single block. 
-        static const std::size_t BLOCK_SIZE_Y;          // Vertical size of a single block.
-        static const std::size_t BLOCK_SPACE;           // Space between blocks.
-        static const std::vector<Color> BLOCK_COLORS;   // Colors of blocks based on their values.
+        static const std::size_t BLOCK_COUNT_X;             // Number of blocks in each horizontal line.
+        static const std::size_t BLOCK_COUNT_Y;             // Number of blocks in each vertical line.
+        static const std::size_t BLOCK_SIZE_X;              // Horizontal size of a single block. 
+        static const std::size_t BLOCK_SIZE_Y;              // Vertical size of a single block.
+        static const std::size_t BLOCK_SPACE;               // Space between blocks.
+        static const std::vector<SDL_Color> BLOCK_COLORS;   // Colors of blocks based on their values.
 
-        static const Color BACKGROUND_COLOR;            // Background color of window.
+        static const SDL_Color BACKGROUND_COLOR;            // Background color of the window.
 
-        static const int DEFAULT_MOVE_SPEED;            // Default move speed of blocks in pixels per frame
-        static const int DEFAULT_SPAWN_SPEED;           // Default spawn speed of blocks in pixels per frame
-        static const int DEFAULT_MERGE_SPEED;           // Default merge speed of blocks in pixels per frame
-        static const int DEFAULT_MERGE_ENLARGEMENT;     // Default percentual enlargement of merged block.
+        static const int DEFAULT_MOVE_SPEED;                // Default move speed of blocks in pixels per frame
+        static const int DEFAULT_SPAWN_SPEED;               // Default spawn speed of blocks in pixels per frame
+        static const int DEFAULT_MERGE_SPEED;               // Default merge speed of blocks in pixels per frame
+        static const int DEFAULT_MERGE_ENLARGEMENT;         // Default percentual enlargement of merged block.
 
-        static const int BLOCK_4_SPAWN_CHANCE;          // Chance of spawning BLOCK_4 instead of BLOCK_2
-        static const int DEFAULT_START_BLOCKS;          // Blocks given to player at start.
+        static const int BLOCK_4_SPAWN_CHANCE;              // Chance of spawning BLOCK_4 instead of BLOCK_2
+        static const int DEFAULT_START_BLOCKS;              // Blocks given to player at start.
 
-        static Color get_block_color(unsigned int number) { return number < BLOCK_COLORS.size() ? BLOCK_COLORS[number] : BLOCK_COLORS[BLOCK_COLORS.size() - 1]; }
+        static const SDL_Color DEFAULT_BLOCK_FONT_COLOR;    // Default font color used in numbers of blocks.
+        
+        static SDL_Color get_block_color(unsigned int number) { return number < BLOCK_COLORS.size() ? BLOCK_COLORS[number] : BLOCK_COLORS[BLOCK_COLORS.size() - 1]; }
+
 
     private:
         Definitions() = delete; // To make it abstract
