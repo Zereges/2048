@@ -88,9 +88,6 @@
     <ClInclude Include="src\Window\Window.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Definitions\Color.hpp">
-      <Filter>Header Files\Defs</Filter>
-    </ClInclude>
     <ClInclude Include="src\Definitions\Definitions.hpp">
       <Filter>Header Files\Defs</Filter>
     </ClInclude>

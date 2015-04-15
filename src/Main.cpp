@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <random>
 #include <time.h>
 #include <vector>
@@ -13,7 +14,9 @@ int main(int argc, char* argv[])
         args.push_back(argv[i]);
     srand((unsigned) time(NULL));
     SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
     int retvalue = Program::start(args);
+    TTF_Quit();
     SDL_Quit();
     return retvalue;
 }
