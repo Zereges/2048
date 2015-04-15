@@ -1,8 +1,10 @@
 #ifndef _NUMBEREDRECT_HPP_
 #define _NUMBEREDRECT_HPP_
 #include <SDL.h>
+#include <unordered_map>
 #include "Definitions.hpp"
 #include "Rect.hpp"
+#include "../Window/Window.hpp"
 
 /*  
  *  Rect with number in it.
@@ -20,10 +22,17 @@ class NumberedRect : public Rect
         
         // Increments number of NumberedRect to next value.
         void next_number() { m_color = Definitions::get_block_color(++m_number); }
-        virtual void draw() const { Rect::draw(); }
+        virtual void draw() const;
+
+        // Initializes SDL_Textures with Block numbers.
+        static void init_number(unsigned int number, TTF_Font* font = nullptr);
+        static void init_numbers();
+        // Frees contents of NUMBERS.
+        static void destroy_numbers() { for (auto iter = NUMBERS.begin(); iter != NUMBERS.end(); ++iter) SDL_DestroyTexture(iter->second); }
 
     private:
         unsigned int m_number;
+        static std::unordered_map<std::size_t, SDL_Texture*> NUMBERS;
 };
 
 #endif // _NUMBEREDRECT_HPP_

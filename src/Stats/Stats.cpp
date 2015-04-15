@@ -2,11 +2,11 @@
 #include <fstream>
 #include "..\Definitions\Definitions.hpp"
 
-Stats::Stats(std::string file_name) : m_stats(StatTypes::MAX, 0l)
+Stats::Stats(std::string file_name) : m_stats(StatTypes::MAX_STATS, 0l)
 {
     std::ifstream file(file_name);
     // if file exists
-    for (int i = 0; i < StatTypes::MAX; ++i)
+    for (int i = 0; i < StatTypes::MAX_STATS; ++i)
     {
         file >> m_stats[i];
         // try catch whatever

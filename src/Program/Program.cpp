@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include "Program.hpp"
 #include "../Window/Window.hpp"
@@ -10,10 +11,12 @@ int Program::m_ret_value = EXIT_SUCCESS;
 int Program::start(const std::vector<std::string>& args)
 {
     const Window& window = Window::get_single();
+    NumberedRect::init_numbers();
     Game game;
     game.start();
     m_is_running = true;
     SDL_Event event;
+
     while (is_running())
     {
         while (SDL_PollEvent(&event))

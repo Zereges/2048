@@ -88,6 +88,7 @@
     <ClCompile Include="src\Animation\Move.cpp" />
     <ClCompile Include="src\Animation\Spawn.cpp" />
     <ClCompile Include="src\Definitions\Definitions.cpp" />
+    <ClCompile Include="src\Definitions\NumberedRect.cpp" />
     <ClCompile Include="src\Definitions\Rect.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />

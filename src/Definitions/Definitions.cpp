@@ -34,3 +34,4 @@ const int Definitions::DEFAULT_START_BLOCKS = 2;
 const int Definitions::DEFAULT_MERGE_ENLARGEMENT = 150;
 
 const SDL_Color Definitions::DEFAULT_BLOCK_FONT_COLOR = { 255, 255, 255 };
+const std::string Definitions::DEFAULT_BLOCK_FONT_NAME = "BPmono.ttf";

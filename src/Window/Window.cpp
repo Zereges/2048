@@ -12,10 +12,9 @@ const Window& Window::get_single()
 
 Window::~Window()
 {
+    NumberedRect::destroy_numbers();
     SDL_DestroyRenderer(const_cast<SDL_Renderer*>(m_renderer));
     SDL_DestroyWindow(const_cast<SDL_Window*>(m_window));
-    if (m_singleton != nullptr)
-        delete m_singleton;
 }
 
 void Window::clear() const
