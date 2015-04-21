@@ -271,9 +271,10 @@ bool Game::is_game_over()
 
 void Game::show_stats()
 {
-    // TTF_FontLineSkip() etc etc 
-    std::size_t width = (m_stats.max_name_size() + Definitions::STATS_DELIMITER.size() + m_stats.max_value_size()) * 6; // Font width
-    std::size_t heigth = (Definitions::STATS_FONT_SIZE + 3) * (StatTypes::MAX_STATS); // 3 = new line height
+    TTF_Font* font = TTF_OpenFont(Definitions::DEFAULT_BLOCK_FONT_NAME.c_str(), Definitions::STATS_FONT_SIZE);
+    int adv; TTF_GlyphMetrics(font, 'a', NULL, NULL, NULL, NULL, &adv); // Letter width, since font is monospaced, all letters share same width 
+    std::size_t width = (m_stats.max_name_size() + Definitions::STATS_DELIMITER.size() + m_stats.max_value_size()) * adv;
+    std::size_t heigth = StatTypes::MAX_STATS * TTF_FontLineSkip(font); // Line height
     StatsWindow stats_window(width, heigth, Definitions::STATS_WINDOW_NAME, m_stats);
     stats_window.wait_for_close();
 }

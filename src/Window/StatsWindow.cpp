@@ -26,5 +26,6 @@ void StatsWindow::wait_for_close()
             }
         }
     }
+    SDL_DestroyTexture(texture);
     close();
 }
