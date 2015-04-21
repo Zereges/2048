@@ -7,12 +7,12 @@ const std::string Definitions::STATS_WINDOW_NAME = "Statisics";
 const std::size_t Definitions::STATS_FONT_SIZE = 12;
 const std::string Definitions::STATS_DELIMITER = "               ";
 
-const std::size_t Definitions::BLOCK_COUNT_X = 2;
+const std::size_t Definitions::BLOCK_COUNT_X = 4;
 const std::size_t Definitions::BLOCK_COUNT_Y = BLOCK_COUNT_X; // Works even if not symetrical.
 const std::size_t Definitions::BLOCK_SIZE_X = 400 / BLOCK_COUNT_X;
 const std::size_t Definitions::BLOCK_SIZE_Y = 400 / BLOCK_COUNT_Y;
 const std::size_t Definitions::BLOCK_SPACE = 15;
-const int Definitions::GAME_WIN_NUMBER = 16;
+const int Definitions::GAME_WIN_NUMBER = 2048;
 
 const std::size_t Definitions::GAME_X = 0;
 const std::size_t Definitions::GAME_Y = 50;

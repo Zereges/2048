@@ -13,6 +13,8 @@ const std::vector<std::string> Stats::STATS_NAMES = {
     "Games won",
     "Games lost",
     "Total time spent playing",
+    "Total score gained",
+    "Highest score obtained",
 };
 
 Stats::Stats(std::string file_name) : Stats()

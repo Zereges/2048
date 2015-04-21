@@ -72,6 +72,7 @@ void Game::start()
     m_won = false;
     m_start_time = time(0);
     m_score = 0;
+    m_window.update_score(std::to_string(m_score));
 }
 
 void Game::play(Directions direction)
@@ -210,7 +211,10 @@ void Game::merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, st
     m_animator.add<Merge>(*m_rects[to_x][to_y]);
     int number = m_rects[to_x][to_y]->next_number();
     m_rects[from_x][from_y] = nullptr;
+    
     m_score += number;
+    m_stats.score(number);
+    m_stats.highest_score(m_score);
 
     if (!m_won && number == Definitions::GAME_WIN_NUMBER)
         won();
@@ -245,6 +249,7 @@ void Game::restart()
 {
     m_canplay = false;
     m_stats.restart(m_start_time);
+    m_animator.clear();
     m_rects = NumberedRects(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
     start();
 }

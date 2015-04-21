@@ -18,6 +18,8 @@ enum StatTypes
     GAME_WINS,
     GAME_LOSES,
     TOTAL_TIME_PLAYED,
+    TOTAL_SCORE,
+    HIGHEST_SCORE,
 
     MAX_STATS,
 };
@@ -42,6 +44,8 @@ class Stats
         void restart(time_t start_time) { ++m_stats[StatTypes::GAME_RESTARTS]; time_played(start_time); }
         void win(time_t start_time) { ++m_stats[StatTypes::GAME_WINS]; time_played(start_time); }
         void lose(time_t start_time) { ++m_stats[StatTypes::GAME_LOSES]; time_played(start_time); }
+        void score(int score) { m_stats[StatTypes::TOTAL_SCORE] += score; }
+        void highest_score(long long score) { m_stats[StatTypes::HIGHEST_SCORE] = std::max(score, m_stats[StatTypes::HIGHEST_SCORE]); }
 
         // Returns string preformated for showing in Stats Window.
         // Returns: preformated string.

@@ -21,6 +21,7 @@ class Animator
             m_animation.erase(std::remove_if(begin(m_animation), end(m_animation), [](std::shared_ptr<Animation>& m){ return m->animate(); }), end(m_animation));
         }
         bool can_play() const { return m_animation.empty(); }
+        void clear() { m_animation.clear(); }
 
     private:
         std::vector<std::shared_ptr<Animation>> m_animation;
