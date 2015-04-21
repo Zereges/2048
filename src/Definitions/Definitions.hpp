@@ -69,6 +69,7 @@ class Definitions
         static const std::size_t BLOCK_SIZE_Y;                          // Vertical size of a single block.
         static const std::size_t BLOCK_SPACE;                           // Space between blocks.
         static const std::vector<SDL_Color> BLOCK_COLORS;               // Colors of blocks based on their values.
+        static const int GAME_WIN_NUMBER;                               // Required number to achieve in order to win the game.
 
         static const SDL_Color BACKGROUND_COLOR;                        // Background color of the window.
 
@@ -80,8 +81,10 @@ class Definitions
         static const int BLOCK_4_SPAWN_CHANCE;                          // Chance of spawning BLOCK_4 instead of BLOCK_2
         static const int DEFAULT_START_BLOCKS;                          // Blocks given to player at start.
 
-        static const SDL_Color DEFAULT_BLOCK_FONT_COLOR;                // Default font color used in blocks' numbers.
-        static const std::string Definitions::DEFAULT_BLOCK_FONT_NAME;  // Default font name used in blocks'numbers.
+        static const SDL_Color WHITE_COLOR;                             // White color.
+        static const SDL_Color BLACK_COLOR;                             // Black color.
+        static const SDL_Color GREY_COLOR;                              // Grey color.
+        static const std::string Definitions::DEFAULT_FONT_NAME;        // Default font name used in program.
         
         static SDL_Color get_block_color(unsigned int number) { return number < BLOCK_COLORS.size() ? BLOCK_COLORS[number] : BLOCK_COLORS[BLOCK_COLORS.size() - 1]; }
 
@@ -94,7 +97,7 @@ class Definitions
         Definitions& operator=(Definitions&&) = delete;
 };
 
-inline unsigned int logb(unsigned int val)
+inline int logb(unsigned int val)
 {
     return (unsigned int) trunc(log2(val));
 }

@@ -4,11 +4,12 @@
 #include <vector>
 #include <exception>
 #include <iostream>
+#include <time.h>
 #include "..\Definitions\Definitions.hpp"
 #include "..\Definitions\Rect.hpp"
 #include "..\Definitions\NumberedRect.hpp"
 #include "..\Animation\Animator.hpp"
-#include "..\Window\Window.hpp"
+#include "..\Window\GameWindow.hpp"
 #include "..\Stats\Stats.hpp"
 
 /*  
@@ -17,7 +18,7 @@
 class Game
 {
     public:
-        Game(Window& window); 
+        Game(GameWindow& window); 
         // SDL_Event handler.
         // Params: event - SDL_Event to process.
         void event_handler(const SDL_Event& event);
@@ -108,20 +109,45 @@ class Game
         // Returns: true if game is over, false otherwise.
         bool is_game_over();
 
-        // Stops the game play and prints result.
-        void stop() { m_canplay = false; /* Game Over */ }
+        // Handles end of the game, when player loses.
+        void game_over()
+        {
+            if (m_won)
+                return;
+
+            m_stats.lose(m_start_time);
+            m_canplay = false;
+        }
+
+        // Handles winning of the game.
+        void won()
+        {
+            m_won = true;
+            m_stats.win(m_start_time);
+        }
+
+        // Stops the game play.
+        void stop() { m_canplay = false; }
         
         // Shows stats window
-        void show_stats();
+        void show_stats() const;
 
+        // Indicates whether Game Over message should be displayed.
+        bool display_game_over() const
+        {
+            return !m_canplay && !m_won;
+        }
 
     private:
-        Rects m_background;    // Rectangles which forms a background of game.
-        NumberedRects m_rects; // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRects forming state of a game.
-        Animator m_animator;   // Animator class handling movement animtions.
-        bool m_canplay;        // Tells whether player game is being played.
-        Window& m_window;      // Reference to Window class showing current game.
-        Stats m_stats;         // Stats regarding current game.
+        Rects m_background;     // Rectangles which forms a background of game.
+        NumberedRects m_rects;  // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRects forming state of a game.
+        Animator m_animator;    // Animator class handling movement animtions.
+        bool m_canplay;         // Tells whether player game is being played.
+        bool m_won;             // Indicates, that player managed to win this game.
+        GameWindow& m_window;       // Reference to Window class showing current game.
+        Stats m_stats;          // Stats regarding current game.
+        time_t m_start_time;    // Time of game start.
+        long long m_score;      // Score earned in current game.
 
         // Passes movement request to animator class and updates inner state.
         // Params: from_x - x coord of Rect on field.
@@ -136,23 +162,6 @@ class Game
         //         to_x - x coord of Rect to merge.
         //         to_y - y coord of Rect to merge.
         void merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, std::size_t to_y);
-
-        void dbg_print(bool verb = false)
-        {
-            for (unsigned int y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
-            {
-                for (unsigned int x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
-                    std::cout << (m_rects[x][y] ? m_rects[x][y]->get_number() : 0) << " ";
-                std::cout << std::endl;
-            }
-            if (verb)
-                for (unsigned int y = 0; y < Definitions::BLOCK_COUNT_Y; ++y)
-                    for (unsigned int x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
-                        if (m_rects[x][y])
-                            std::cout << "(" << x << "," << y << "): " << m_rects[x][y]->get_rect().x << ", " << m_rects[x][y]->get_rect().y << std::endl;
-
-            std::cout << std::endl;
-        }
 };
 
 #endif // _GAME_HPP_

@@ -19,7 +19,7 @@ class Window
         void close() { SDL_DestroyWindow(m_window); }
         ~Window();
 
-    private:
+    protected:
         SDL_Window* m_window;
         const SDL_Renderer* m_renderer;
 };

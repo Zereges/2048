@@ -21,7 +21,8 @@ class NumberedRect : public Rect
         unsigned int get_number() const { return m_number; }
         
         // Increments number of NumberedRect to next value.
-        void next_number() { m_color = Definitions::get_block_color(++m_number); }
+        // Returns: Real shown number.
+        int next_number() { m_color = Definitions::get_block_color(++m_number); return (int) pow(2, m_number); }
         virtual void draw(Window& window) const;
 
         // Initializes SDL_Textures with Block numbers.

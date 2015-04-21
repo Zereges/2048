@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <time.h>
 #include "..\Definitions\Definitions.hpp"
 enum StatTypes
 {
@@ -14,6 +15,9 @@ enum StatTypes
     BLOCKS_MOVED,
     BLOCKS_MERGED,
     GAME_RESTARTS,
+    GAME_WINS,
+    GAME_LOSES,
+    TOTAL_TIME_PLAYED,
 
     MAX_STATS,
 };
@@ -35,7 +39,9 @@ class Stats
         void play(Directions dir);
         void move() { ++m_stats[StatTypes::BLOCKS_MOVED]; }
         void merge() { ++m_stats[StatTypes::BLOCKS_MERGED]; }
-        void restart() { ++m_stats[StatTypes::GAME_RESTARTS]; }
+        void restart(time_t start_time) { ++m_stats[StatTypes::GAME_RESTARTS]; time_played(start_time); }
+        void win(time_t start_time) { ++m_stats[StatTypes::GAME_WINS]; time_played(start_time); }
+        void lose(time_t start_time) { ++m_stats[StatTypes::GAME_LOSES]; time_played(start_time); }
 
         // Returns string preformated for showing in Stats Window.
         // Returns: preformated string.
@@ -59,6 +65,8 @@ class Stats
     private:
         std::vector<long long int> m_stats;
         static const std::vector<std::string> STATS_NAMES;
+
+        inline void time_played(time_t start_time) { m_stats[StatTypes::TOTAL_TIME_PLAYED] += (time(0) - start_time); }
 };
 
 

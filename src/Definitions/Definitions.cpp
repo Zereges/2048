@@ -5,13 +5,14 @@ const std::size_t Definitions::GAME_WINDOW_HEIGHT = GAME_HEIGHT;
 
 const std::string Definitions::STATS_WINDOW_NAME = "Statisics";
 const std::size_t Definitions::STATS_FONT_SIZE = 12;
-const std::string Definitions::STATS_DELIMITER = "                     ";
+const std::string Definitions::STATS_DELIMITER = "               ";
 
-const std::size_t Definitions::BLOCK_COUNT_X = 4;
+const std::size_t Definitions::BLOCK_COUNT_X = 2;
 const std::size_t Definitions::BLOCK_COUNT_Y = BLOCK_COUNT_X; // Works even if not symetrical.
 const std::size_t Definitions::BLOCK_SIZE_X = 400 / BLOCK_COUNT_X;
 const std::size_t Definitions::BLOCK_SIZE_Y = 400 / BLOCK_COUNT_Y;
 const std::size_t Definitions::BLOCK_SPACE = 15;
+const int Definitions::GAME_WIN_NUMBER = 16;
 
 const std::size_t Definitions::GAME_X = 0;
 const std::size_t Definitions::GAME_Y = 50;
@@ -37,5 +38,7 @@ const int Definitions::BLOCK_4_SPAWN_CHANCE = 15;
 const int Definitions::DEFAULT_START_BLOCKS = 2;
 const int Definitions::DEFAULT_MERGE_ENLARGEMENT = 150;
 
-const SDL_Color Definitions::DEFAULT_BLOCK_FONT_COLOR = { 255, 255, 255 };
-const std::string Definitions::DEFAULT_BLOCK_FONT_NAME = "monofonto.ttf";
+const SDL_Color Definitions::BLACK_COLOR = { 0, 0, 0 };
+const SDL_Color Definitions::GREY_COLOR = { 127, 127, 127 };
+const SDL_Color Definitions::WHITE_COLOR = { 255, 255, 255 };
+const std::string Definitions::DEFAULT_FONT_NAME = "monofonto.ttf";

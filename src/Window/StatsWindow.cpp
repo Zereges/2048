@@ -6,8 +6,9 @@ void StatsWindow::wait_for_close()
     bool show = true;    
     SDL_Event event;
 
-    TTF_Font* font = TTF_OpenFont(Definitions::DEFAULT_BLOCK_FONT_NAME.c_str(), Definitions::STATS_FONT_SIZE);
-    SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(font, m_stats.to_string().c_str(), Definitions::DEFAULT_BLOCK_FONT_COLOR, 500);
+    TTF_Font* font = TTF_OpenFont(Definitions::DEFAULT_FONT_NAME.c_str(), Definitions::STATS_FONT_SIZE);
+    int width; /* = */ SDL_GetWindowSize(m_window, &width, NULL);
+    SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(font, m_stats.to_string().c_str(), Definitions::WHITE_COLOR, width);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(const_cast<SDL_Renderer*>(get_renderer()), textSurface);
     SDL_Rect rect = { 0, 0, textSurface->w, textSurface->h };
     SDL_FreeSurface(textSurface);

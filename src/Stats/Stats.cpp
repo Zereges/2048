@@ -9,10 +9,13 @@ const std::vector<std::string> Stats::STATS_NAMES = {
     "Down moves",
     "Blocks moved",
     "Blocks merged",
-    "Game Restarts",
+    "Game restarts",
+    "Games won",
+    "Games lost",
+    "Total time spent playing",
 };
 
-Stats::Stats(std::string file_name) : m_stats(StatTypes::MAX_STATS, 0l)
+Stats::Stats(std::string file_name) : Stats()
 {
     std::ifstream file(file_name);
     // if file exists

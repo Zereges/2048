@@ -27,6 +27,9 @@ int Program::start(const std::vector<std::string>& args)
         window.clear();
         window.add(game.get_background());
         window.add(game.get_rects());
+        window.display_game_over(game.display_game_over());
+        window.display_score();
+        window.display_stats_button();
         window.render_finish();
     }
     return m_ret_value;
