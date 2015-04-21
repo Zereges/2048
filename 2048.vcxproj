@@ -94,6 +94,8 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Program\Program.cpp" />
     <ClCompile Include="src\Stats\Stats.cpp" />
+    <ClCompile Include="src\Window\GameWindow.cpp" />
+    <ClCompile Include="src\Window\StatsWindow.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +110,8 @@
     <ClInclude Include="src\Game\Game.hpp" />
     <ClInclude Include="src\Program\Program.hpp" />
     <ClInclude Include="src\Stats\Stats.hpp" />
+    <ClInclude Include="src\Window\GameWindow.hpp" />
+    <ClInclude Include="src\Window\StatsWindow.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

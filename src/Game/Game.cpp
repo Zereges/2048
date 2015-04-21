@@ -7,9 +7,10 @@
 #include "../Animation/Move.hpp"
 #include "../Animation/Spawn.hpp"
 #include "../Animation/Merge.hpp"
+#include "../Window/StatsWindow.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
-Game::Game() : m_canplay(false)
+Game::Game(Window& window) : m_window(window), m_canplay(false)
 {
     m_background.emplace_back(0, 0, Definitions::BACKGROUND_COLOR, Definitions::GAME_WIDTH, Definitions::GAME_HEIGHT);
     for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
@@ -52,7 +53,7 @@ void Game::key_handler(const SDL_KeyboardEvent& keyevent)
 
         case SDLK_r: restart(); break; // TBD
         case SDLK_b: random_block(); break; // TBD
-        case SDLK_s: stop(); break; // TBD
+        case SDLK_s: show_stats(); break; // TBD
         case SDLK_e: // TBD
             m_rects = NumberedRects(Definitions::BLOCK_COUNT_X, std::vector<std::shared_ptr<NumberedRect>>(Definitions::BLOCK_COUNT_Y, nullptr));
             for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
@@ -74,7 +75,7 @@ void Game::play(Directions direction)
     if (!can_play())
         return;
 
-    m_stats.play(direction);
+    bool played = false;
 
     switch (direction)
     {
@@ -88,9 +89,15 @@ void Game::play(Directions direction)
                     std::size_t i = x;
                     while (i > 0 && m_rects[--i][y] == nullptr); // find closest block
                     if (can_merge(m_rects[x][y], m_rects[i][y]))
+                    {
                         merge_to(x, y, i, y);
+                        played = true;
+                    }
                     else if (m_rects[i][y] == nullptr || m_rects[++i][y] == nullptr)
+                    {
                         move_to(x, y, i, y);
+                        played = true;
+                    }
                 }
             }
             break;
@@ -104,9 +111,15 @@ void Game::play(Directions direction)
                     std::size_t i = x;
                     while (i < Definitions::BLOCK_COUNT_X - 1 && m_rects[++i][y] == nullptr);
                     if (can_merge(m_rects[x][y], m_rects[i][y]))
+                    {
                         merge_to(x, y, i, y);
+                        played = true;
+                    }
                     else if (m_rects[i][y] == nullptr || m_rects[--i][y] == nullptr)
+                    {
                         move_to(x, y, i, y);
+                        played = true;
+                    }
                 }
             }
             break;
@@ -120,9 +133,15 @@ void Game::play(Directions direction)
                     std::size_t i = y;
                     while (i > 0 && m_rects[x][--i] == nullptr); // find closest block
                     if (can_merge(m_rects[x][y], m_rects[x][i]))
+                    {
                         merge_to(x, y, x, i);
+                        played = true;
+                    }
                     else if (m_rects[x][i] == nullptr || m_rects[x][++i] == nullptr)
+                    {
                         move_to(x, y, x, i);
+                        played = true;
+                    }
                 }
             }
             break;
@@ -136,20 +155,35 @@ void Game::play(Directions direction)
                     std::size_t i = y;
                     while (i < Definitions::BLOCK_COUNT_Y - 1 && m_rects[x][++i] == nullptr);
                     if (can_merge(m_rects[x][y], m_rects[x][i]))
+                    {
                         merge_to(x, y, x, i);
+                        played = true;
+                    }
                     else if (m_rects[x][i] == nullptr || m_rects[x][--i] == nullptr)
+                    {
                         move_to(x, y, x, i);
+                        played = true;
+                    }
                 }
             }
             break;
     }
 
-    on_turn_end();
+
+    if (played)
+        m_stats.play(direction);
+
+    if (!played)
+        std::cout << "DBG: not played" << std::endl;
+
+    on_turn_end(played);
 }
 
-void Game::on_turn_end()
+void Game::on_turn_end(bool played /* = true*/)
 {
-    random_block();
+    if (played)
+        random_block();
+
     if (is_game_over())
         stop();
 }
@@ -225,6 +259,21 @@ bool Game::is_game_over()
             if (can_merge(m_rects[x][y], m_rects[x + 1][y]))
                 return false;
         }
-
+    for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X - 1; ++x)
+        if (can_merge(m_rects[x][Definitions::BLOCK_COUNT_Y - 1], m_rects[x + 1][Definitions::BLOCK_COUNT_Y - 1]))
+            return false;
+    for (std::size_t y = 0; y < Definitions::BLOCK_COUNT_Y - 1; ++y)
+        if (can_merge(m_rects[Definitions::BLOCK_COUNT_X - 1][y], m_rects[Definitions::BLOCK_COUNT_X - 1][y + 1]))
+            return false;
+    
     return true;
+}
+
+void Game::show_stats()
+{
+    // TTF_FontLineSkip() etc etc 
+    std::size_t width = (m_stats.max_name_size() + Definitions::STATS_DELIMITER.size() + m_stats.max_value_size()) * 6; // Font width
+    std::size_t heigth = (Definitions::STATS_FONT_SIZE + 3) * (StatTypes::MAX_STATS); // 3 = new line height
+    StatsWindow stats_window(width, heigth, Definitions::STATS_WINDOW_NAME, m_stats);
+    stats_window.wait_for_close();
 }

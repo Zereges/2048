@@ -2,7 +2,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include "Program.hpp"
-#include "../Window/Window.hpp"
+#include "../Window/GameWindow.hpp"
 #include "../Game/Game.hpp"
 #include "../Animation/Animator.hpp"
 bool Program::m_is_running = false;
@@ -10,9 +10,9 @@ int Program::m_ret_value = EXIT_SUCCESS;
 
 int Program::start(const std::vector<std::string>& args)
 {
-    const Window& window = Window::get_single();
-    NumberedRect::init_numbers();
-    Game game;
+    GameWindow window(Definitions::GAME_WINDOW_WIDTH, Definitions::GAME_WINDOW_HEIGHT, Definitions::GAME_WINDOW_NAME);
+    NumberedRect::init_numbers(window);
+    Game game(window);
     game.start();
     m_is_running = true;
     SDL_Event event;

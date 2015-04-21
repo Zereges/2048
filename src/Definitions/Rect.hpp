@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <memory> // size_t
 #include "../Definitions/Definitions.hpp"
+#include "../Window/Window.hpp"
 
 /*  
  *  SDL_Rect wrapper with coloring posibility.
@@ -21,7 +22,7 @@ class Rect
         SDL_Rect& get_rect() { return m_rect; }
         const SDL_Rect& get_rect() const { return m_rect; }
         const SDL_Color& get_color() const { return m_color; }
-        virtual void draw() const;
+        virtual void draw(Window& window) const;
 
     protected:
         SDL_Rect m_rect;

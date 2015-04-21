@@ -1,7 +1,11 @@
 #include "Definitions.hpp"
-const std::string Definitions::WINDOW_NAME = "2048 Game";
-const std::size_t Definitions::WINDOW_WIDTH = GAME_WIDTH;
-const std::size_t Definitions::WINDOW_HEIGHT = GAME_HEIGHT;
+const std::string Definitions::GAME_WINDOW_NAME = "2048 Game";
+const std::size_t Definitions::GAME_WINDOW_WIDTH = GAME_WIDTH;
+const std::size_t Definitions::GAME_WINDOW_HEIGHT = GAME_HEIGHT;
+
+const std::string Definitions::STATS_WINDOW_NAME = "Statisics";
+const std::size_t Definitions::STATS_FONT_SIZE = 12;
+const std::string Definitions::STATS_DELIMITER = "                     ";
 
 const std::size_t Definitions::BLOCK_COUNT_X = 4;
 const std::size_t Definitions::BLOCK_COUNT_Y = BLOCK_COUNT_X; // Works even if not symetrical.
@@ -34,4 +38,4 @@ const int Definitions::DEFAULT_START_BLOCKS = 2;
 const int Definitions::DEFAULT_MERGE_ENLARGEMENT = 150;
 
 const SDL_Color Definitions::DEFAULT_BLOCK_FONT_COLOR = { 255, 255, 255 };
-const std::string Definitions::DEFAULT_BLOCK_FONT_NAME = "BPmono.ttf";
+const std::string Definitions::DEFAULT_BLOCK_FONT_NAME = "monofonto.ttf";

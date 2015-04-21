@@ -22,11 +22,15 @@ class NumberedRect : public Rect
         
         // Increments number of NumberedRect to next value.
         void next_number() { m_color = Definitions::get_block_color(++m_number); }
-        virtual void draw() const;
+        virtual void draw(Window& window) const;
 
         // Initializes SDL_Textures with Block numbers.
-        static void init_number(unsigned int number, TTF_Font* font = nullptr);
-        static void init_numbers();
+        // Params: window - reference to Window class, for which Renderer will be used.
+        //         number - number to create.
+        //         font   - pointer to font used.
+        static void init_number(Window& window, unsigned int number, TTF_Font* font = nullptr);
+        static void init_numbers(Window& window);
+
         // Frees contents of NUMBERS.
         static void destroy_numbers() { for (auto iter = NUMBERS.begin(); iter != NUMBERS.end(); ++iter) SDL_DestroyTexture(iter->second); }
 

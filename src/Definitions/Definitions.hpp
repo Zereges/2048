@@ -49,9 +49,13 @@ enum Blocks
 class Definitions
 {
     public:
-        static const std::string WINDOW_NAME;                           // Window name.
-        static const std::size_t WINDOW_WIDTH;                          // Total window width.
-        static const std::size_t WINDOW_HEIGHT;                         // Total window height.
+        static const std::string GAME_WINDOW_NAME;                      // Game window name.
+        static const std::size_t GAME_WINDOW_WIDTH;                     // Total game window width.
+        static const std::size_t GAME_WINDOW_HEIGHT;                    // Total game window height.
+
+        static const std::string STATS_WINDOW_NAME;                     // Stats window name.
+        static const std::size_t STATS_FONT_SIZE;                       // Font size used in stats window.
+        static const std::string STATS_DELIMITER;                       // Delimiter used in stats window.
 
         static const std::size_t GAME_X;                                // X-Coord where Game begins.
         static const std::size_t GAME_Y;                                // Y-Coord where Game begins.

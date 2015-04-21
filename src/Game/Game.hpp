@@ -17,7 +17,7 @@
 class Game
 {
     public:
-        Game();
+        Game(Window& window); 
         // SDL_Event handler.
         // Params: event - SDL_Event to process.
         void event_handler(const SDL_Event& event);
@@ -86,7 +86,8 @@ class Game
         void restart();
 
         // Is called when after player's turn is processed.
-        void on_turn_end();
+        // Params: played - indicates, that player made a move this turn.
+        void on_turn_end(bool played = true);
 
         // Checks whether two NumberedRects can be merged together.
         // Params: r1 - NumberedRect 1 to check
@@ -110,13 +111,16 @@ class Game
         // Stops the game play and prints result.
         void stop() { m_canplay = false; /* Game Over */ }
         
+        // Shows stats window
+        void show_stats();
+
 
     private:
         Rects m_background;    // Rectangles which forms a background of game.
         NumberedRects m_rects; // Definitions::BLOCK_COUNT_X * Definitions::BLOCK_COUNT_Y field of NumberedRects forming state of a game.
         Animator m_animator;   // Animator class handling movement animtions.
         bool m_canplay;        // Tells whether player game is being played.
-
+        Window& m_window;      // Reference to Window class showing current game.
         Stats m_stats;         // Stats regarding current game.
 
         // Passes movement request to animator class and updates inner state.
