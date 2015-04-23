@@ -56,6 +56,8 @@ class Definitions
         static const std::string STATS_WINDOW_NAME;                     // Stats window name.
         static const std::size_t STATS_FONT_SIZE;                       // Font size used in stats window.
         static const std::string STATS_DELIMITER;                       // Delimiter used in stats window.
+        static const std::size_t STATS_BUTTON_HEIGHT;                   // Height of Global/Current stats switching button.
+        static const std::string STATS_FILE_NAME;                        // File name, where stats are saved.
 
         static const std::size_t GAME_X;                                // X-Coord where Game begins.
         static const std::size_t GAME_Y;                                // Y-Coord where Game begins.

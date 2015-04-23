@@ -144,8 +144,9 @@ class Game
         Animator m_animator;    // Animator class handling movement animtions.
         bool m_canplay;         // Tells whether player game is being played.
         bool m_won;             // Indicates, that player managed to win this game.
-        GameWindow& m_window;       // Reference to Window class showing current game.
+        GameWindow& m_window;   // Reference to Window class showing current game.
         Stats m_stats;          // Stats regarding current game.
+        Stats m_stats_global;   // Global stats for player.
         time_t m_start_time;    // Time of game start.
         long long m_score;      // Score earned in current game.
 

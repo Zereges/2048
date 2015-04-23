@@ -6,6 +6,8 @@ const std::size_t Definitions::GAME_WINDOW_HEIGHT = GAME_HEIGHT;
 const std::string Definitions::STATS_WINDOW_NAME = "Statisics";
 const std::size_t Definitions::STATS_FONT_SIZE = 12;
 const std::string Definitions::STATS_DELIMITER = "               ";
+const std::size_t Definitions::STATS_BUTTON_HEIGHT = 25;
+const std::string Definitions::STATS_FILE_NAME = "stats.dat";
 
 const std::size_t Definitions::BLOCK_COUNT_X = 4;
 const std::size_t Definitions::BLOCK_COUNT_Y = BLOCK_COUNT_X; // Works even if not symetrical.

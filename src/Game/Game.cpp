@@ -11,7 +11,7 @@
 #include "../Window/StatsWindow.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
-Game::Game(GameWindow& window) : m_window(window), m_canplay(false), m_won(false), m_start_time(0), m_score(0)
+Game::Game(GameWindow& window) : m_window(window), m_canplay(false), m_won(false), m_start_time(0), m_score(0), m_stats_global(Definitions::STATS_FILE_NAME)
 {
     m_background.emplace_back(0, 0, Definitions::BACKGROUND_COLOR, Definitions::GAME_WIDTH, Definitions::GAME_HEIGHT);
     for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
@@ -285,6 +285,8 @@ void Game::show_stats() const
     int adv; /* = */ TTF_GlyphMetrics(font, 'a', NULL, NULL, NULL, NULL, &adv); // Letter width, since font is monospaced, all letters share same width 
     std::size_t width = (m_stats.max_name_size() + Definitions::STATS_DELIMITER.size() + m_stats.max_value_size()) * adv;
     std::size_t heigth = StatTypes::MAX_STATS * TTF_FontLineSkip(font); // Line height
-    StatsWindow stats_window(width, heigth, Definitions::STATS_WINDOW_NAME, m_stats);
+    StatsWindow stats_window(width, heigth + Definitions::STATS_BUTTON_HEIGHT, Definitions::STATS_WINDOW_NAME, m_stats, m_stats);
+    m_window.hide();
     stats_window.wait_for_close();
+    m_window.show();
 }

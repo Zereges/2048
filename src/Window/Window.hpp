@@ -15,6 +15,8 @@ class Window
 
         const SDL_Renderer* get_renderer() const { return m_renderer; }
         void clear() const;
+        void hide() const { SDL_HideWindow(m_window); }
+        void show() const { SDL_ShowWindow(m_window); }
         void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
         void close() { SDL_DestroyWindow(m_window); }
         ~Window();
