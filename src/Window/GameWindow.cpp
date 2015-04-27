@@ -1,6 +1,6 @@
 #include <SDL.h>
 #include "GameWindow.hpp"
-#include "..\Game\Game.hpp"
+#include "../Game/Game.hpp"
 
 void GameWindow::add(const Rects& objects)
 {

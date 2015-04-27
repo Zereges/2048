@@ -4,8 +4,8 @@
 #include <memory>
 #include <vector>
 #include <algorithm>
-#include "..\Definitions\Definitions.hpp"
-#include "..\Definitions\Rect.hpp"
+#include "../Definitions/Definitions.hpp"
+#include "../Definitions/Rect.hpp"
 #include "Animation.hpp"
 
 /*  

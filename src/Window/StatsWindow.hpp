@@ -3,8 +3,8 @@
 #include <memory>
 #include <SDL.h>
 #include "Window.hpp"
-#include "..\Definitions\Definitions.hpp"
-#include "..\Stats\Stats.hpp"
+#include "../Definitions/Definitions.hpp"
+#include "../Stats/Stats.hpp"
 
 /*
  *  Wrapper around SDL_Window and SDL_Renderer allowing creation and drawing rects on window.

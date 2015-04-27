@@ -1,6 +1,6 @@
 #include <SDL.h>
 #include "Window.hpp"
-#include "..\Game\Game.hpp"
+#include "../Game/Game.hpp"
 
 Window::~Window()
 {

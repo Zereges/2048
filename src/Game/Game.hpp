@@ -5,12 +5,12 @@
 #include <exception>
 #include <iostream>
 #include <time.h>
-#include "..\Definitions\Definitions.hpp"
-#include "..\Definitions\Rect.hpp"
-#include "..\Definitions\NumberedRect.hpp"
-#include "..\Animation\Animator.hpp"
-#include "..\Window\GameWindow.hpp"
-#include "..\Stats\Stats.hpp"
+#include "../Definitions/Definitions.hpp"
+#include "../Definitions/Rect.hpp"
+#include "../Definitions/NumberedRect.hpp"
+#include "../Animation/Animator.hpp"
+#include "../Window/GameWindow.hpp"
+#include "../Stats/Stats.hpp"
 
 /*  
  *  Game class handling user events.

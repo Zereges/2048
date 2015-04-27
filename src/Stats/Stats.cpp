@@ -1,6 +1,6 @@
 #include "Stats.hpp"
 #include <fstream>
-#include "..\Definitions\Definitions.hpp"
+#include "../Definitions/Definitions.hpp"
 
 const std::vector<std::string> Stats::STATS_NAMES = {
     "Left moves", /* = 0*/

@@ -5,8 +5,8 @@
 #include <fstream>
 #include <algorithm>
 #include <time.h>
-#include "..\Definitions\Definitions.hpp"
-#include "..\Window\Window.hpp"
+#include "../Definitions/Definitions.hpp"
+#include "../Window/Window.hpp"
 
 enum StatTypes
 {
