@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <time.h>
 #include "..\Definitions\Definitions.hpp"
+#include "..\Window\Window.hpp"
+
 enum StatTypes
 {
     LEFT_MOVES = 0,
@@ -20,6 +22,7 @@ enum StatTypes
     TOTAL_TIME_PLAYED,
     TOTAL_SCORE,
     HIGHEST_SCORE,
+    MAXIMAL_BLOCK,
 
     MAX_STATS,
 };
@@ -31,11 +34,29 @@ class Stats
         Stats() : m_stats(MAX_STATS, 0l) { }
 
         // Global statistics loaded from given file.
-        Stats(std::string file_name);
+        Stats(const std::string& file_name, const Window& window);
         
+        Stats(const Stats&) = default;
+        Stats& operator=(const Stats&) = default;
+        Stats(Stats&& s) : m_stats(std::move(s.m_stats)) {  }
+
         // Calculates sum of stats into left operand.
         // Returns: Reference to summed stats.
-        Stats& operator+=(const Stats& stats) { for (int i = 0; i < StatTypes::MAX_STATS; ++i) m_stats[i] += stats.m_stats[i]; return *this; }
+        Stats& operator+=(const Stats& stats)
+        {
+            for (int i = 0; i < StatTypes::MAX_STATS; ++i)
+                switch (i)
+                {
+                case StatTypes::HIGHEST_SCORE:
+                case StatTypes::MAXIMAL_BLOCK:
+                    m_stats[i] = std::max(m_stats[i], stats.m_stats[i]);
+                    break;
+                default:
+                    m_stats[i] += stats.m_stats[i];
+                }
+
+            return *this;
+        }
 
         // Statistics increments.
         void play(Directions dir);
@@ -45,7 +66,9 @@ class Stats
         void win(time_t start_time) { ++m_stats[StatTypes::GAME_WINS]; time_played(start_time); }
         void lose(time_t start_time) { ++m_stats[StatTypes::GAME_LOSES]; time_played(start_time); }
         void score(int score) { m_stats[StatTypes::TOTAL_SCORE] += score; }
+        void update_time(time_t diff) { m_stats[StatTypes::TOTAL_TIME_PLAYED] += diff; }
         void highest_score(long long score) { m_stats[StatTypes::HIGHEST_SCORE] = std::max(score, m_stats[StatTypes::HIGHEST_SCORE]); }
+        void maximal_block(long long number) { m_stats[StatTypes::MAXIMAL_BLOCK] = std::max(number, m_stats[StatTypes::MAXIMAL_BLOCK]); }
 
         // Returns string preformated for showing in Stats Window.
         // Returns: preformated string.
@@ -64,6 +87,24 @@ class Stats
             {
                 return s1.size() < s2.size();
             })->size();
+        }
+
+        // Attempts to save stats to given stream.
+        friend std::ostream& operator<<(std::ostream& str, const Stats& stats)
+        {
+            for (std::size_t i = 0; i < StatTypes::MAX_STATS; ++i)
+            {
+                str << stats.m_stats[i] << " ";
+            }
+            return str;
+        }
+
+        // Sums two stats into new one.
+        friend Stats operator+(const Stats& stats1, const Stats& stats2)
+        {
+            Stats s(stats1);
+            s += stats2;
+            return std::move(s);
         }
 
     private:

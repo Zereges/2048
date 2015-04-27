@@ -68,7 +68,7 @@ class GameWindow : public Window
         
         // Tells whether mouse was clicked in stats_rect.
         // Params: event - SDL_MouseButtonEvent with information about mouse click.
-        // Returns: true if button was clicked, false otherwise.
+        // Returns: true if stats button was clicked, false otherwise.
         bool stats_button_clicked(const SDL_MouseButtonEvent& event)
         {
             return stats_rect.x <= event.x && event.x <= stats_rect.x + stats_rect.w &&

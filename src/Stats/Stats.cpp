@@ -1,5 +1,5 @@
 #include "Stats.hpp"
-#include <iostream>
+#include <fstream>
 #include "..\Definitions\Definitions.hpp"
 
 const std::vector<std::string> Stats::STATS_NAMES = {
@@ -15,16 +15,24 @@ const std::vector<std::string> Stats::STATS_NAMES = {
     "Total time spent playing",
     "Total score gained",
     "Highest score obtained",
+    "Maximal block",
 };
 
-Stats::Stats(std::string file_name) : Stats()
+Stats::Stats(const std::string& file_name, const Window& window) : Stats()
 {
-    std::ifstream file(file_name);
-    // if file exists
-    for (int i = 0; i < StatTypes::MAX_STATS; ++i)
+    std::ifstream file(file_name, std::ifstream::binary);
+    if (!file.is_open())
+        return;
+
+    for (std::size_t i = 0; i < StatTypes::MAX_STATS; ++i)
     {
         file >> m_stats[i];
-        // try catch whatever
+    }
+    
+    if (file.fail())
+    {
+        window.warning("File " + file_name + " corrupted. Using blank file.");
+        *this = Stats(); // ?
     }
 }
 

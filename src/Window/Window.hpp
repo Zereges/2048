@@ -1,6 +1,7 @@
 #ifndef _WINDOW_HPP_
 #define _WINDOW_HPP_
 #include <memory>
+#include <string>
 #include <SDL.h>
 #include "..\Definitions\Definitions.hpp"
 
@@ -17,6 +18,7 @@ class Window
         void clear() const;
         void hide() const { SDL_HideWindow(m_window); }
         void show() const { SDL_ShowWindow(m_window); }
+        void warning(const std::string& text) const { SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags::SDL_MESSAGEBOX_WARNING, "Warning", text.c_str(), m_window); }
         void render_finish() const { SDL_RenderPresent(const_cast<SDL_Renderer*>(m_renderer)); }
         void close() { SDL_DestroyWindow(m_window); }
         ~Window();

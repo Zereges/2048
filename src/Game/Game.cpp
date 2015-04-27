@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include <assert.h>
 #include <time.h>
+#include <fstream>
 #include "../Program/Program.hpp"
 #include "../Definitions/Rect.hpp"
 #include "../Definitions/NumberedRect.hpp"
@@ -11,7 +12,7 @@
 #include "../Window/StatsWindow.hpp"
 #define assert_coords(x, y) assert((x) >= 0 && (x) < Definitions::BLOCK_COUNT_X && (y) >= 0 && (y) < Definitions::BLOCK_COUNT_Y)
 
-Game::Game(GameWindow& window) : m_window(window), m_canplay(false), m_won(false), m_start_time(0), m_score(0), m_stats_global(Definitions::STATS_FILE_NAME)
+Game::Game(GameWindow& window) : m_window(window), m_canplay(false), m_won(false), m_start_time(0), m_score(0), m_stats_global(Definitions::STATS_FILE_NAME, m_window)
 {
     m_background.emplace_back(0, 0, Definitions::BACKGROUND_COLOR, Definitions::GAME_WIDTH, Definitions::GAME_HEIGHT);
     for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X; ++x)
@@ -32,8 +33,15 @@ void Game::event_handler(const SDL_Event& event)
     switch (event.type)
     {
         case SDL_QUIT:
+        {
             Program::stop(true);
+            std::ofstream file(Definitions::STATS_FILE_NAME, std::ofstream::binary);
+            m_stats_global += m_stats;
+            file << m_stats_global;
+            if (file.fail())
+                m_window.warning("Could not save stats to " + Definitions::STATS_FILE_NAME + ".");
             break;
+        }
         case SDL_KEYDOWN:
             key_handler(event.key);
             break;
@@ -215,6 +223,7 @@ void Game::merge_to(std::size_t from_x, std::size_t from_y, std::size_t to_x, st
     m_score += number;
     m_stats.score(number);
     m_stats.highest_score(m_score);
+    m_stats.maximal_block(number);
 
     if (!m_won && number == Definitions::GAME_WIN_NUMBER)
         won();
@@ -279,13 +288,18 @@ bool Game::is_game_over()
     return true;
 }
 
-void Game::show_stats() const
+void Game::show_stats()
 {
+    time_t now = time(0);
+    m_stats.update_time(now - m_start_time);
+    Stats tmp_stats = m_stats + m_stats_global;
+    m_start_time = now;
+
     TTF_Font* font = TTF_OpenFont(Definitions::DEFAULT_FONT_NAME.c_str(), Definitions::STATS_FONT_SIZE);
-    int adv; /* = */ TTF_GlyphMetrics(font, 'a', NULL, NULL, NULL, NULL, &adv); // Letter width, since font is monospaced, all letters share same width 
-    std::size_t width = (m_stats.max_name_size() + Definitions::STATS_DELIMITER.size() + m_stats.max_value_size()) * adv;
+    int adv; /* = */ TTF_GlyphMetrics(font, 'a', NULL, NULL, NULL, NULL, &adv); // Letter width, since font is monospaced, all letters share the same width 
+    std::size_t width = (tmp_stats.max_name_size() + Definitions::STATS_DELIMITER.size() + tmp_stats.max_value_size()) * adv;
     std::size_t heigth = StatTypes::MAX_STATS * TTF_FontLineSkip(font); // Line height
-    StatsWindow stats_window(width, heigth + Definitions::STATS_BUTTON_HEIGHT, Definitions::STATS_WINDOW_NAME, m_stats, m_stats);
+    StatsWindow stats_window(width, heigth + Definitions::STATS_BUTTON_HEIGHT, Definitions::STATS_WINDOW_NAME, m_stats, std::move(tmp_stats));
     m_window.hide();
     stats_window.wait_for_close();
     m_window.show();

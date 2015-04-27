@@ -130,7 +130,7 @@ class Game
         void stop() { m_canplay = false; }
         
         // Shows stats window
-        void show_stats() const;
+        void show_stats();
 
         // Indicates whether Game Over message should be displayed.
         bool display_game_over() const
@@ -147,7 +147,7 @@ class Game
         GameWindow& m_window;   // Reference to Window class showing current game.
         Stats m_stats;          // Stats regarding current game.
         Stats m_stats_global;   // Global stats for player.
-        time_t m_start_time;    // Time of game start.
+        time_t m_start_time;    // Time of latest m_stats update.
         long long m_score;      // Score earned in current game.
 
         // Passes movement request to animator class and updates inner state.
