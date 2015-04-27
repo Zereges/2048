@@ -29,6 +29,13 @@ const std::vector<SDL_Color> Definitions::BLOCK_COLORS = {
     { 130, 146,  20 }, // BLOCK_16
     { 156, 105,  10 }, // BLOCK_32
     { 166,  41,   0 }, // BLOCK_64
+    { 255, 172,  89 }, // BLOCK_128
+    {  91, 202, 255 }, // BLOCK_256
+    {   0, 145, 215 }, // BLOCK_512
+    {   0, 128, 192 }, // BLOCK_1024
+    {   0,  95, 140 }, // BLOCK_2048
+
+    // others are same as previous one
 };
 
 const SDL_Color Definitions::BACKGROUND_COLOR = { 30, 30, 30 };

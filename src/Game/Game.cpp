@@ -45,7 +45,7 @@ void Game::event_handler(const SDL_Event& event)
         case SDL_KEYDOWN:
             key_handler(event.key);
             break;
-        case SDL_MOUSEBUTTONDOWN:
+        case SDL_MOUSEBUTTONUP:
             if (m_window.stats_button_clicked(event.button))
                 show_stats();
             break;
@@ -67,8 +67,6 @@ void Game::key_handler(const SDL_KeyboardEvent& keyevent)
         case SDLK_UP: play(UP); break;
         case SDLK_DOWN: play(DOWN); break;
         case SDLK_r: restart(); break;
-
-        case SDLK_b: random_block(); break; // TBD
     }
 }
 

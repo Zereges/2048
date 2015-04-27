@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <iostream>
 #include "StatsWindow.hpp"
 
 void StatsWindow::wait_for_close()
@@ -14,9 +15,12 @@ void StatsWindow::wait_for_close()
                 show = false;
                 break;
             }
-            if (event.type == SDL_MOUSEBUTTONDOWN)
+            if (event.type == SDL_MOUSEBUTTONUP)
+            {
                 if (switch_button_clicked(event.button))
                     switch_stats();
+                break;
+            }
         }
     }
     close();
