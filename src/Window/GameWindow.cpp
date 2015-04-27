@@ -4,14 +4,14 @@
 
 void GameWindow::add(const Rects& objects)
 {
-    for (auto iter = std::cbegin(objects); iter != std::cend(objects); ++iter)
+    for (auto iter = std::begin(objects); iter != std::end(objects); ++iter)
         iter->draw(*this);
 }
 
 void GameWindow::add(const NumberedRects& objects)
 {
-    for (auto iter = cbegin(objects); iter != cend(objects); ++iter)
-        for (auto jter = cbegin(*iter); jter != cend(*iter); ++jter)
+    for (auto iter = begin(objects); iter != end(objects); ++iter)
+        for (auto jter = begin(*iter); jter != end(*iter); ++jter)
             if (*jter != nullptr)
                 (*jter)->draw(*this);
 }

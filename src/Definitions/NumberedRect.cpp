@@ -1,3 +1,4 @@
+#include <cmath>
 #include "NumberedRect.hpp"
 
 std::unordered_map<std::size_t, SDL_Texture*> NumberedRect::NUMBERS;
