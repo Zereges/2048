@@ -19,7 +19,7 @@ const std::vector<std::string> Stats::STATS_NAMES = {
     "Maximal block",
 };
 
-Stats::Stats(const std::string& file_name, const Window& window) : Stats()
+Stats::Stats(const std::string& file_name, Window& warn_window) : Stats()
 {
     std::ifstream file(file_name, std::ifstream::binary);
     if (!file.is_open())
@@ -32,7 +32,7 @@ Stats::Stats(const std::string& file_name, const Window& window) : Stats()
     
     if (file.fail())
     {
-        window.warning("File " + file_name + " corrupted. Using blank file.");
+        warn_window.warning("File " + file_name + " corrupted. Using blank file.");
         *this = Stats(); // ?
     }
 }

@@ -20,7 +20,7 @@ Game::Game(GameWindow& window) : m_window(window), m_canplay(false), m_won(false
         {
             m_background.emplace_back(Definitions::GAME_X + Definitions::BLOCK_SPACE + x * (Definitions::BLOCK_SIZE_X + Definitions::BLOCK_SPACE),
                 Definitions::GAME_Y + Definitions::BLOCK_SPACE + y * (Definitions::BLOCK_SIZE_Y + Definitions::BLOCK_SPACE),
-                Definitions::get_block_color(0));
+                Definitions::get_block_color(BLOCK_0));
         }
 
     if (Definitions::GAME_Y > 0)
@@ -267,6 +267,7 @@ bool Game::is_game_over()
         for (auto j = i->begin(); j != i->end(); ++j)
             if ((*j) == nullptr)
                 return false;
+
     // Board is full, looking for merge.
     for (std::size_t x = 0; x < Definitions::BLOCK_COUNT_X - 1; ++x)
         for (std::size_t y = 0; y < Definitions::BLOCK_COUNT_Y - 1; ++y)
