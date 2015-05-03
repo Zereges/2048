@@ -12,8 +12,8 @@
 class NumberedRect : public Rect
 {
     public:
-        NumberedRect(const SDL_Point& point, unsigned int number, std::size_t w = Definitions::BLOCK_SIZE_X, std::size_t h = Definitions::BLOCK_SIZE_Y) :
-            Rect(point, Definitions::get_block_color(number), w, h), m_number(number) { }
+        NumberedRect(const SDL_Point& point, Blocks block, std::size_t width = Definitions::BLOCK_SIZE_X, std::size_t height = Definitions::BLOCK_SIZE_Y) :
+            Rect(point, Definitions::get_block_color(block), width, height), m_number(block) { }
         virtual ~NumberedRect() = default;
 
         // Gets number representing value of NumberedRect.
@@ -22,7 +22,7 @@ class NumberedRect : public Rect
         
         // Increments number of NumberedRect to next value.
         // Returns: Real shown number.
-        int next_number() { m_color = Definitions::get_block_color(++m_number); return (int) pow(2, m_number); }
+        int next_number() { m_color = Definitions::get_block_color(++m_number); return pow2(m_number); }
         virtual void draw(Window& window) const;
 
         // Initializes SDL_Textures with Block numbers.
@@ -36,7 +36,7 @@ class NumberedRect : public Rect
         static void destroy_numbers() { for (auto iter = NUMBERS.begin(); iter != NUMBERS.end(); ++iter) SDL_DestroyTexture(iter->second); }
 
     private:
-        unsigned int m_number;
+        Blocks m_number;
         static std::unordered_map<std::size_t, SDL_Texture*> NUMBERS;
 };
 

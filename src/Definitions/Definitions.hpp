@@ -22,6 +22,7 @@ enum Directions
 
 enum Blocks
 {
+    BLOCK_0 = 0,
     BLOCK_2 = 1,
     BLOCK_4,
     BLOCK_8,
@@ -42,6 +43,14 @@ enum Blocks
 
     MAX_BLOCKS,
 };
+
+inline Blocks& operator++(Blocks& block)
+{
+    block = static_cast<Blocks>(static_cast<int>(block) + 1);
+    if (block == Blocks::MAX_BLOCKS)
+        throw std::invalid_argument("Invalid argument for Blocks::operator++");
+    return block;
+}
 
 /*  
  *  Abstract class containing definitions used throughout the program.
@@ -100,14 +109,8 @@ class Definitions
         Definitions& operator=(Definitions&&) = delete;
 };
 
-inline int logb(unsigned int val)
-{
-    return (unsigned int) trunc(log2(val));
-}
-
-inline bool chance(int c)
-{
-    return rand() % 100 < c;
-}
+inline int logb(unsigned int val) { return (unsigned int) trunc(log2(val)); }
+inline int pow2(Blocks block) { return (int) pow(2, (int) block); }
+inline bool chance(int c) { return rand() % 100 < c; }
 
 #endif // _DEFINITIONS_HPP_
