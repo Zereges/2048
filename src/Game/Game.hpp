@@ -19,7 +19,7 @@ class Game
 {
     public:
         //! Base class constuctor
-        // \param window Reference to window where to draw interface and game state.
+        //! \param window Reference to window where to draw interface and game state.
         Game(GameWindow& window); 
         
         //! Event handler for SDL_Event.

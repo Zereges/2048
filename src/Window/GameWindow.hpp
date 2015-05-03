@@ -21,7 +21,7 @@ class GameWindow : public Window
         //! Destructor for Game Window
         ~GameWindow();
         //! Adds Rects for showing them later as the background.
-        //! \params background Rects representing the background.
+        //! \param background Rects representing the background.
         void add(const Rects& background);
 
         //! Adds NumberedRects for showing as game state.
