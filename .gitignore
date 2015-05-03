@@ -21,6 +21,7 @@
 *.la
 *.a
 *.lib
+!lib/**/*.lib
 
 # Executables
 *.exe
@@ -33,4 +34,9 @@
 *.suo
 Release/*
 Debug/*
+
+# Project specific
 *.ttf
+
+#Documentation
+doc/*
