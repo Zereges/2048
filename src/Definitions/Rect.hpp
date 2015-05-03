@@ -21,7 +21,6 @@ class Rect
         virtual ~Rect() = default;
         SDL_Rect& get_rect() { return m_rect; }
         const SDL_Rect& get_rect() const { return m_rect; }
-        const SDL_Color& get_color() const { return m_color; }
         virtual void draw(Window& window) const;
 
     protected:
