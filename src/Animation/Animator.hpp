@@ -9,7 +9,7 @@
 #include "Animation.hpp"
 
 /*!
- * Animation class handles procession of animation of Rects.
+ * \brief Animation class handles procession of animation of Rects.
  * \sa Merge, Move, Spawn
  */
 class Animator

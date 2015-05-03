@@ -6,7 +6,7 @@
 #include "../Definitions/Definitions.hpp"
 
 /*!
- * Wrapper around SDL_Window and SDL_Renderer allowing easy creation and drawing rects on the window.
+ * \brief Wrapper around SDL_Window and SDL_Renderer allowing easy creation and drawing rects on the window.
  * Also allows easy handling of common user requests.
  * \sa GameWindow, StatsWindow
  */

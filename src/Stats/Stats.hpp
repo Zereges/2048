@@ -29,7 +29,7 @@ enum StatTypes
     MAX_STATS,
 };
 
-/*! Stats class representing statistics for current game and global playtrough.
+/*! \brief Stats class representing statistics for current game and global playtrough.
  *  Provides interface for easy manipulation with statistics during game play.
  */
 class Stats

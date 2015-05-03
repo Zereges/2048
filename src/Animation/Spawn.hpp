@@ -8,7 +8,7 @@
 #include "Animation.hpp"
 
 /*!
- * Spawn class handling animation of spawning of new blocks.
+ * \brief Spawn class handling animation of spawning of new blocks.
  * \sa Animation
  */
 class Spawn : public Animation

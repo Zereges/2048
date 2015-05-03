@@ -8,7 +8,7 @@
 #include "Animation.hpp"
 
 /*!
- * Merge class handling animation of merging of blocks.
+ * \brief Merge class handling animation of merging of blocks.
  * \sa Animation
  */
 class Merge : public Animation

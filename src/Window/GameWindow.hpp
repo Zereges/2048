@@ -6,7 +6,7 @@
 #include "../Definitions/Definitions.hpp"
 
 /*!
- * Windows used for displaying Game with its animations.
+ * \brief Windows used for displaying Game with its animations.
  * \sa Window
  */
 class GameWindow : public Window

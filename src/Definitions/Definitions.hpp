@@ -62,7 +62,7 @@ inline Blocks& operator++(Blocks& block)
 }
 
 /*!
- * Abstract class containing definitions used throughout the program.
+ * \brief Abstract class containing definitions used throughout the program.
  */
 class Definitions
 {

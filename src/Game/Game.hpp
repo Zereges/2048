@@ -13,7 +13,7 @@
 #include "../Stats/Stats.hpp"
 
 /*!
- * Game class handling user events and game state
+ * \brief Game class handling user events and game state
  */
 class Game
 {

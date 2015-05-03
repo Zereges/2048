@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 /*!
- * Static class for handling program existence and SDL events.
+ * \brief Static class for handling program existence and SDL events.
  */
 class Program
 {

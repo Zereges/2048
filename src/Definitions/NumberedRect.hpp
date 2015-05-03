@@ -7,7 +7,7 @@
 #include "../Window/Window.hpp"
 
 /*!
- * Rect with stored number displayed on the board.
+ * \brief Rect with stored number displayed on the board.
  * \sa Rect
  */
 class NumberedRect : public Rect

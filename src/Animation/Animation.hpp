@@ -4,7 +4,7 @@
 #include "../Definitions/Rect.hpp"
 
 /*!
- *  Interface for animating events throughout playthrough.
+ *  \brief Interface for animating events throughout playthrough.
  */
 class Animation
 {

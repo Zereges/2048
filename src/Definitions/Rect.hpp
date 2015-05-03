@@ -6,7 +6,7 @@
 #include "../Window/Window.hpp"
 
 /*!
- * Wrapper around SDL_Rect coloring posibility.
+ * \brief Wrapper around SDL_Rect coloring posibility.
  * \sa SDL_Rect, SDL_Color, SDL_Point
  */
 class Rect

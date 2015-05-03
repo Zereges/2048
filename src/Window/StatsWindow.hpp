@@ -7,7 +7,7 @@
 #include "../Stats/Stats.hpp"
 
 /*!
- * Window used for showing Game current and global statistics.
+ * \brief Window used for showing Game current and global statistics.
  * \sa Stats
  */
 class StatsWindow : public Window

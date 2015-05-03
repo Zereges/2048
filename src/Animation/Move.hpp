@@ -8,7 +8,7 @@
 #include "Animation.hpp"
 
 /*!
- * Move class handling animation of moving of blocks.
+ * \brief Move class handling animation of moving of blocks.
  * \sa Animation
  */
 class Move : public Animation
