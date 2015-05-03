@@ -26,9 +26,10 @@ You can download source codes from this repository and build it using Microsoft
 Visual Studio. Also you have to donwload runtime [SDL](https://www.libsdl.org/release/SDL2-2.0.3-win32-x86.zip)
 and [SDL_TTF](https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.12-win32-x86.zip)
 DLLs. Repository already contains Development Libraries in *lib* folder.
+DoxyGen generated documentation can be found accessed by clicking [this](http://www.zereges.cz/2048/doc/) link
 
 You can download binary containing everything required (except for Visual C++
-Redistributable 2013) to run the program from [this](http://www.zereges.cz/download/2048.zip) mirror.
+Redistributable 2013) to run the program from [this](http://www.zereges.cz/2048/2048.zip) mirror.
 
 ##Installation
 The program does not need to be installed at all. Only requirement is to
