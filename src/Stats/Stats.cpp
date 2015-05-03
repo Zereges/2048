@@ -7,12 +7,13 @@ const std::vector<std::string> Stats::STATS_NAMES = {
     "Right moves",
     "Up moves",
     "Down moves",
+    "Total moves",
     "Blocks moved",
     "Blocks merged",
     "Game restarts",
     "Games won",
     "Games lost",
-    "Total time spent playing",
+    "Total seconds spent playing",
     "Total score gained",
     "Highest score obtained",
     "Maximal block",
@@ -45,6 +46,7 @@ void Stats::play(Directions dir)
         case UP: ++m_stats[StatTypes::UP_MOVES]; break;
         case DOWN: ++m_stats[StatTypes::DOWN_MOVES]; break;
     }
+    ++m_stats[StatTypes::TOTAL_MOVES];
 }
 
 std::string Stats::to_string() const

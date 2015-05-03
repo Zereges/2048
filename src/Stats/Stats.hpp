@@ -14,6 +14,7 @@ enum StatTypes
     RIGHT_MOVES,
     UP_MOVES,
     DOWN_MOVES,
+    TOTAL_MOVES,
     BLOCKS_MOVED,
     BLOCKS_MERGED,
     GAME_RESTARTS,
