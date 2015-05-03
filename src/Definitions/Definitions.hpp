@@ -87,6 +87,7 @@ class Definitions
         static const SDL_Color BLACK_COLOR;                             // Black color.
         static const SDL_Color GREY_COLOR;                              // Grey color.
         static const std::string DEFAULT_FONT_NAME;                     // Default font name used in program.
+        static const std::size_t DEFAULT_GAME_FONT_SIZE;                // Default font size used in Game Window
         
         static SDL_Color get_block_color(unsigned int number) { return number < BLOCK_COLORS.size() ? BLOCK_COLORS[number] : BLOCK_COLORS[BLOCK_COLORS.size() - 1]; }
 

@@ -11,33 +11,8 @@
 class GameWindow : public Window
 {
     public:
-        GameWindow(std::size_t width, std::size_t height, std::string name) : Window(width, height, name)
-        {
-            game_window_font = TTF_OpenFont(Definitions::DEFAULT_FONT_NAME.c_str(), 20);
-
-            SDL_Surface* textSurface = TTF_RenderText_Blended(game_window_font, "GAME OVER! Press R for restart.", Definitions::BLACK_COLOR);
-            game_over_texture = SDL_CreateTextureFromSurface(const_cast<SDL_Renderer*>(get_renderer()), textSurface);
-            game_over_rect = { (Definitions::GAME_WIDTH - textSurface->w) / 2, (Definitions::GAME_HEIGHT - textSurface->h) / 2, textSurface->w, textSurface->h };
-            SDL_FreeSurface(textSurface);
-
-            textSurface = TTF_RenderText_Blended(game_window_font, "Score: 0", Definitions::WHITE_COLOR);
-            game_score_texture = SDL_CreateTextureFromSurface(const_cast<SDL_Renderer*>(get_renderer()), textSurface);
-            game_score_rect = { 4, 4, textSurface->w, Definitions::GAME_Y - 8 };
-            SDL_FreeSurface(textSurface);
-
-            textSurface = TTF_RenderText_Blended(game_window_font, "Show Stats", Definitions::WHITE_COLOR);
-            stats_texture = SDL_CreateTextureFromSurface(const_cast<SDL_Renderer*>(get_renderer()), textSurface);
-            stats_rect = { Definitions::GAME_WIDTH - textSurface->w - 4, 4, textSurface->w, Definitions::GAME_Y - 8 };
-            SDL_FreeSurface(textSurface);
-        }
-        ~GameWindow()
-        {
-            TTF_CloseFont(game_window_font);
-            SDL_DestroyTexture(game_over_texture);
-            SDL_DestroyTexture(stats_texture);
-            if (game_score_texture != nullptr)
-                SDL_DestroyTexture(game_score_texture);
-        }
+        GameWindow(std::size_t width, std::size_t height, std::string name);
+        ~GameWindow();
         // Adds Rects for showing as background.
         // Params: background - Rects representing the background.
         void add(const Rects& background);

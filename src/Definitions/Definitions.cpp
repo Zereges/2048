@@ -51,3 +51,4 @@ const SDL_Color Definitions::BLACK_COLOR = { 0, 0, 0 };
 const SDL_Color Definitions::GREY_COLOR = { 127, 127, 127 };
 const SDL_Color Definitions::WHITE_COLOR = { 255, 255, 255 };
 const std::string Definitions::DEFAULT_FONT_NAME = "monofonto.ttf";
+const std::size_t Definitions::DEFAULT_GAME_FONT_SIZE = 20;
