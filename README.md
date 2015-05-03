@@ -53,3 +53,4 @@ progress. You can close the game by clicking top right cross, pressing
 Alt+F4 or Ctrl+Q.
 
 Written by Filip Kliber (zereges<at>gmail.com) in 2014/2015 as Semester Assignment
+Link to [GitHub](https://github.com/Zereges/2048) repository.
