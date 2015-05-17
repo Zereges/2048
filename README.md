@@ -36,6 +36,9 @@ The program does not need to be installed at all. Only requirement is to
 preserve folder structure, so that 2048.exe are in the same folder as
 SDL2.dll, SDL2_ttf.dll, libfreetype-6.dll, zlib1.dll, monofonto.ttf.
 
+##Program Start
+Program can be started by executing **2048.exe**.
+
 ##Controls
 In the top left corner of the game window, there is an indicator showing
 current score. If there is a "W" symbol after numeric value of the score,
